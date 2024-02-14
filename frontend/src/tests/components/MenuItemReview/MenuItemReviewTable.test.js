@@ -151,8 +151,6 @@ describe("UserTable tests", () => {
   test("Delete button calls delete callback", async () => {
     // arrange
     const currentUser = currentUserFixtures.adminUser;
-    const expectedHeaders = ["id", "ItemId", "ReviewerEmail", "Stars", "DateReviewed", "Comments"];
-    const expectedFields = ["id", "itemId", "reviewerEmail", "stars", "dateReviewed", "comments"];
     const testId = "MenuItemReviewsTable";
 
     // act - render the component
