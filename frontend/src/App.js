@@ -19,6 +19,10 @@ import PlaceholderEditPage from "main/pages/Placeholder/PlaceholderEditPage";
 import { hasRole, useCurrentUser } from "main/utils/currentUser";
 
 import "bootstrap/dist/css/bootstrap.css";
+import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
+import MenuItemReviewEditPage from "main/pages/MenuItemReview/MenuItemReviewEditPage";
+import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
+
 
 function App() {
   const { data: currentUser } = useCurrentUser();
@@ -61,7 +65,7 @@ function App() {
             </>
           )
         }
-         {
+        {
           hasRole(currentUser, "ROLE_USER") && (
             <>
               <Route exact path="/placeholder" element={<PlaceholderIndexPage />} />
@@ -76,6 +80,21 @@ function App() {
             </>
           )
         }
+        {
+              hasRole(currentUser, "ROLE_USER") && (
+                <>
+                  <Route exact path="/menuitemreviews" element={<MenuItemReviewIndexPage />} />
+                </>
+              )
+        }
+        {
+              hasRole(currentUser, "ROLE_ADMIN") && (
+                <>
+                  <Route exact path="/menuitemreviews/edit/:id" element={<MenuItemReviewEditPage />} />
+                  <Route exact path="/menuitemreviews/create" element={<MenuItemReviewCreatePage />} />
+                </>
+              )
+        }        
       </Routes>
     </BrowserRouter>
   );
