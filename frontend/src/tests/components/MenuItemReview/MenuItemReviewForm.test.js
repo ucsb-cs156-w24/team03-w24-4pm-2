@@ -49,14 +49,16 @@ describe("MenuItemReviewForm tests", () => {
         await screen.findByTestId("MenuItemReviewForm-reviewerEmail");
 
         const itemIdField = screen.getByTestId("MenuItemReviewForm-itemId");
-        const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
+        // const reviewerEmailField = screen.getByTestId("MenuItemReviewForm-reviewerEmail");
         const starsField = screen.getByTestId("MenuItemReviewForm-stars");
         const dateReviewedField = screen.getByTestId("MenuItemReviewForm-dateReviewed");
-        const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
+        // const commentsField = screen.getByTestId("MenuItemReviewForm-comments");
         const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
         fireEvent.change(itemIdField, { target: { value: 'bad-input' } });
         fireEvent.change(starsField, { target: { value: 'bad-input' } });
+        fireEvent.change(starsField, { target: { value: '-10' } });
+        fireEvent.change(starsField, { target: { value: '55' } });
         fireEvent.change(dateReviewedField, { target: { value: 'bad-input' } });
         fireEvent.click(submitButton);
 
