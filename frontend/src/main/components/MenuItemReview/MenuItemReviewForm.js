@@ -44,7 +44,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             <Form.Control
                                 data-testid={testIdPrefix + "-id"}
                                 id="id"
-                                type="number"
+                                type="text"
                                 {...register("id")}
                                 value={initialContents.id}
                                 disabled
@@ -59,7 +59,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                         <Form.Control
                             data-testid={testIdPrefix + "-itemId"}
                             id="itemId"
-                            type="number"
+                            type="text"
                             isInvalid={Boolean(errors.itemId)}
                             {...register("itemId", { required: true, pattern: int_regex })}
                         />
@@ -90,7 +90,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                         <Form.Control
                             data-testid={testIdPrefix + "-stars"}
                             id="stars"
-                            type="number"
+                            type="text"
                             isInvalid={Boolean(errors.stars)}
                             {...register("stars", { required: true, pattern: stars_regex})}
                         />
