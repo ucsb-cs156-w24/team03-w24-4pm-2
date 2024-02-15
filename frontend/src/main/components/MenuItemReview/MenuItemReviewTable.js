@@ -2,7 +2,7 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/UCSBDateUtils"
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/menuItemReviewUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
@@ -33,11 +33,11 @@ export default function MenuItemReviewsTable({ reviews, currentUser }) {
             accessor: 'id', // accessor is the "key" in the data
         },
         {
-            Header: 'ItemId',
+            Header: 'Item Id',
             accessor: 'itemId',
         },
         {
-            Header: 'ReviewerEmail',
+            Header: 'Reviewer Email',
             accessor: 'reviewerEmail',
         },
         {
@@ -45,7 +45,7 @@ export default function MenuItemReviewsTable({ reviews, currentUser }) {
             accessor: 'stars',
         },
         {
-            Header: 'DateReviewed',
+            Header: 'Date Reviewed',
             accessor: 'dateReviewed',
         },
         {
