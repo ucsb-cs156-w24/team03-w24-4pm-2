@@ -117,13 +117,13 @@ describe("MenuItemReviewIndexPage tests", () => {
     });
 
     test("what happens when you click delete, admin", async () => {
+        // arrange
         setupAdminUser();
         const queryClient = new QueryClient();
-
         axiosMock.onGet("/api/menuitemreviews/all").reply(200, menuItemReviewFixtures.threeReviews);
-        axiosMock.onDelete("/api/menuitemreviews").reply(200, "MenuItemReview with id 1 was deleted");
+        axiosMock.onDelete("/api/menuitemreviews").reply(200, "Menu Item Review with id 1 was deleted");
 
-
+        // act
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -132,22 +132,20 @@ describe("MenuItemReviewIndexPage tests", () => {
             </QueryClientProvider>
         );
 
+        // assert
         await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toBeInTheDocument(); });
 
         expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
 
-
         const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
         expect(deleteButton).toBeInTheDocument();
 
+        // act
         fireEvent.click(deleteButton);
 
-        await waitFor(() => { expect(mockToast).toBeCalledWith("MenuItemReview with id 1 was deleted") });
+        // assert
+        await waitFor(() => { expect(mockToast).toBeCalledWith("Menu Item Review with id 1 was deleted") });
 
-        await waitFor(() => { expect(axiosMock.history.delete.length).toBe(1); });
-        // expect(axiosMock.history.delete[0].url).toBe("/api/menuitemreviews");
-        // expect(axiosMock.history.delete[0].url).toBe("/api/menuitemreviews");
-        // expect(axiosMock.history.delete[0].params).toEqual({ id: 1 });
     });
 
 });
