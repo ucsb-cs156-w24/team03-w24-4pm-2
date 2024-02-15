@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
+import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -32,7 +32,7 @@ jest.mock('react-router-dom', () => {
     };
 });
 
-describe("RestaurantEditPage tests", () => {
+describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
 
     describe("when the backend doesn't return data", () => {
 
@@ -43,7 +43,7 @@ describe("RestaurantEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/restaurants", { params: { id: 17 } }).timeout();
+            axiosMock.onGet("/api/ucsbdiningcommonsmenuitem", { params: { id: 17 } }).timeout();
         });
 
         const queryClient = new QueryClient();
@@ -54,12 +54,12 @@ describe("RestaurantEditPage tests", () => {
             render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
-                        <RestaurantEditPage />
+                        <UCSBDiningCommonsMenuItemEditPage />
                     </MemoryRouter>
                 </QueryClientProvider>
             );
-            await screen.findByText("Edit Restaurant");
-            expect(screen.queryByTestId("Restaurant-name")).not.toBeInTheDocument();
+            await screen.findByText("Edit Menu Item");
+            expect(screen.queryByTestId("UCSBDiningCommonsMenuItem-name")).not.toBeInTheDocument();
             restoreConsole();
         });
     });
@@ -73,15 +73,17 @@ describe("RestaurantEditPage tests", () => {
             axiosMock.resetHistory();
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
-            axiosMock.onGet("/api/restaurants", { params: { id: 17 } }).reply(200, {
+            axiosMock.onGet("/api/ucsbdiningcommonsmenuitem", { params: { id: 17 } }).reply(200, {
                 id: 17,
-                name: "Freebirds",
-                description: "Burritos"
+                name: "pizza",
+                diningCommonsCode: "de la guerra",
+                station: "italian"
             });
-            axiosMock.onPut('/api/restaurants').reply(200, {
+            axiosMock.onPut('/api/ucsbdiningcommonsmenuitem').reply(200, {
                 id: "17",
-                name: "Freebirds World Burrito",
-                description: "Really big Burritos"
+                name: "pizza",
+                diningCommonsCode: "de la guerra",
+                station: "italian"
             });
         });
 
@@ -92,41 +94,47 @@ describe("RestaurantEditPage tests", () => {
             render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
-                        <RestaurantEditPage />
+                        <UCSBDiningCommonsMenuItemEditPage />
                     </MemoryRouter>
                 </QueryClientProvider>
             );
 
-            await screen.findByTestId("RestaurantForm-id");
+            await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
-            const idField = screen.getByTestId("RestaurantForm-id");
-            const nameField = screen.getByTestId("RestaurantForm-name");
-            const descriptionField = screen.getByTestId("RestaurantForm-description");
-            const submitButton = screen.getByTestId("RestaurantForm-submit");
+            const idField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-id");
+            const nameField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
+            const diningCommonsCodeField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode");
+            const stationField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
+            const submitButton = screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit");
 
             expect(idField).toBeInTheDocument();
             expect(idField).toHaveValue("17");
-            expect( nameField).toBeInTheDocument();
-            expect(nameField).toHaveValue("Freebirds");
-            expect(descriptionField).toBeInTheDocument();
-            expect(descriptionField).toHaveValue("Burritos");
+            expect(nameField).toBeInTheDocument();
+            expect(nameField).toHaveValue("pizza");
+            expect(diningCommonsCodeField).toBeInTheDocument();
+            expect(diningCommonsCodeField).toHaveValue("de la guerra");
+            expect(stationField).toBeInTheDocument();
+            expect(stationField).toHaveValue("italian");
 
             expect(submitButton).toHaveTextContent("Update");
 
-            fireEvent.change(nameField, { target: { value: 'Freebirds World Burrito' } });
-            fireEvent.change(descriptionField, { target: { value: 'Totally Giant Burritos' } });
+            fireEvent.change(nameField, { target: { value: 'huge pizza' } });
+            fireEvent.change(diningCommonsCodeField, { target: { value: 'DLG' } });
+            fireEvent.change(stationField, { target: { value: 'new york' } });
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("Restaurant Updated - id: 17 name: Freebirds World Burrito");
+            expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem Updated - id: 17 name: huge pizza");
             
-            expect(mockNavigate).toBeCalledWith({ "to": "/restaurants" });
+            expect(mockNavigate).toBeCalledWith({ "to": "/ucsbdiningcommonsmenuitems" });
 
             expect(axiosMock.history.put.length).toBe(1); // times called
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
-                name: 'Freebirds World Burrito',
-                description: 'Totally Giant Burritos'
+                id: "17",
+                name: "huge pizza",
+                diningCommonsCode: "DLG",
+                station: "new york"
             })); // posted object
 
 
@@ -137,31 +145,34 @@ describe("RestaurantEditPage tests", () => {
             render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
-                        <RestaurantEditPage />
+                        <UCSBDiningCommonsMenuItemEditPage />
                     </MemoryRouter>
                 </QueryClientProvider>
             );
 
-            await screen.findByTestId("RestaurantForm-id");
+            await screen.findByTestId("UCSBDiningCommonsMenuItemForm-id");
 
-            const idField = screen.getByTestId("RestaurantForm-id");
-            const nameField = screen.getByTestId("RestaurantForm-name");
-            const descriptionField = screen.getByTestId("RestaurantForm-description");
-            const submitButton = screen.getByTestId("RestaurantForm-submit");
+            const idField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-id");
+            const nameField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-name");
+            const diningCommonsCodeField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-diningCommonsCode");
+            const stationField = screen.getByTestId("UCSBDiningCommonsMenuItemForm-station");
+            const submitButton = screen.getByTestId("UCSBDiningCommonsMenuItemForm-submit");
 
             expect(idField).toHaveValue("17");
-            expect(nameField).toHaveValue("Freebirds");
-            expect(descriptionField).toHaveValue("Burritos");
+            expect(nameField).toHaveValue("pizza");
+            expect(diningCommonsCodeField).toHaveValue("de la guerra");
+            expect(stationField).toHaveValue("italian");
             expect(submitButton).toBeInTheDocument();
 
-            fireEvent.change(nameField, { target: { value: 'Freebirds World Burrito' } })
-            fireEvent.change(descriptionField, { target: { value: 'Big Burritos' } })
+            fireEvent.change(nameField, { target: { value: 'huge pizza' } });
+            fireEvent.change(diningCommonsCodeField, { target: { value: 'DLG' } });
+            fireEvent.change(stationField, { target: { value: 'new york' } });
 
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("Restaurant Updated - id: 17 name: Freebirds World Burrito");
-            expect(mockNavigate).toBeCalledWith({ "to": "/restaurants" });
+            expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem Updated - id: 17 name: huge pizza");
+            expect(mockNavigate).toBeCalledWith({ "to": "/ucsbdiningcommonsmenuitems" });
         });
 
        
