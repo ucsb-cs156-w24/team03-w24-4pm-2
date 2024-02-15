@@ -81,9 +81,9 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
             });
             axiosMock.onPut('/api/ucsbdiningcommonsmenuitem').reply(200, {
                 id: "17",
-                name: "pizza",
-                diningCommonsCode: "de la guerra",
-                station: "italian"
+                name: "huge pizza",
+                diningCommonsCode: "DLG",
+                station: "new york"
             });
         });
 
@@ -124,14 +124,13 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem Updated - id: 17 name: huge pizza");
+            expect(mockToast).toBeCalledWith("Menu Item Updated - id: 17 name: huge pizza");
             
             expect(mockNavigate).toBeCalledWith({ "to": "/ucsbdiningcommonsmenuitems" });
 
             expect(axiosMock.history.put.length).toBe(1); // times called
             expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
-                id: "17",
                 name: "huge pizza",
                 diningCommonsCode: "DLG",
                 station: "new york"
@@ -171,7 +170,7 @@ describe("UCSBDiningCommonsMenuItemEditPage tests", () => {
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("UCSBDiningCommonsMenuItem Updated - id: 17 name: huge pizza");
+            expect(mockToast).toBeCalledWith("Menu Item Updated - id: 17 name: huge pizza");
             expect(mockNavigate).toBeCalledWith({ "to": "/ucsbdiningcommonsmenuitems" });
         });
 
