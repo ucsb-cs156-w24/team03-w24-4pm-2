@@ -54,7 +54,7 @@ describe("UserTable tests", () => {
 
   });
 
-  test("Has the expected colum headers and content for adminUser", () => {
+  test("Has the expected column headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
@@ -117,6 +117,31 @@ describe("UserTable tests", () => {
 
     await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsborganizations/edit/ZBT'));
 
+  });
+
+  test("Delete button calls delete callback", async () => {
+    // arrange
+    const currentUser = currentUserFixtures.adminUser;
+    const testId = "UCSBOrganizationTable"
+
+    // act - render the component
+    render(
+      <QueryClientProvider client={queryClient}>
+        <MemoryRouter>
+          <UCSBOrganizationTable orgs={ucsbOrganizationsFixtures.threeOrgs} currentUser={currentUser} />
+        </MemoryRouter>
+      </QueryClientProvider>
+    );
+
+    // assert - check that the expected content is rendered
+    expect(await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("ZBT");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Zeta Beta Tau");
+
+    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
+    expect(deleteButton).toBeInTheDocument();
+
+    // act - click the delete button
+    fireEvent.click(deleteButton);
   });
 
 });
