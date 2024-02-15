@@ -7,7 +7,7 @@ import MenuItemReviewEditPage from 'main/pages/MenuItemReview/MenuItemReviewEdit
 import { menuItemReviewFixtures } from 'fixtures/menuItemReviewFixtures';
 
 export default {
-    title: 'pages/MenuItemReview/MenuItemReviewPage',
+    title: 'pages/MenuItemReview/MenuItemReviewEditPage',
     component: MenuItemReviewEditPage
 };
 
