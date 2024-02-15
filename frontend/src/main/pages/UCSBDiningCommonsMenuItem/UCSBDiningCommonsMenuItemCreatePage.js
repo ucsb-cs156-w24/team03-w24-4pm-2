@@ -24,7 +24,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({storybook=false}) {
     objectToAxiosParams,
      { onSuccess }, 
      // Stryker disable next-line all : hard to set up test for caching
-     ["/api/diningcommonsmenuitem/all"] // mutation makes this key stale so that pages relying on it reload
+     ["/api/ucsbdiningcommonsmenuitem/all"] // mutation makes this key stale so that pages relying on it reload
      );
 
   const { isSuccess } = mutation
@@ -34,7 +34,7 @@ export default function UCSBDiningCommonsMenuItemCreatePage({storybook=false}) {
   }
 
   if (isSuccess && !storybook) {
-    return <Navigate to="/diningcommonsmenuitem" />
+    return <Navigate to="/ucsbdiningcommonsmenuitems" />
   }
 
   return (
