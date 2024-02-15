@@ -1,7 +1,7 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
-import UCSBDiningCommonsMenuItemEditPage from "main/pages/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemEditPage";
+import RestaurantEditPage from "main/pages/Restaurants/RestaurantEditPage";
 
 import { apiCurrentUserFixtures } from "fixtures/currentUserFixtures";
 import { systemInfoFixtures } from "fixtures/systemInfoFixtures";
@@ -54,7 +54,7 @@ describe("RestaurantEditPage tests", () => {
             render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
-                        <UCSBDiningCommonsMenuItemEditPage />
+                        <RestaurantEditPage />
                     </MemoryRouter>
                 </QueryClientProvider>
             );
@@ -92,7 +92,7 @@ describe("RestaurantEditPage tests", () => {
             render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
-                        <UCSBDiningCommonsMenuItemEditPage />
+                        <RestaurantEditPage />
                     </MemoryRouter>
                 </QueryClientProvider>
             );
@@ -137,7 +137,7 @@ describe("RestaurantEditPage tests", () => {
             render(
                 <QueryClientProvider client={queryClient}>
                     <MemoryRouter>
-                        <UCSBDiningCommonsMenuItemEditPage />
+                        <RestaurantEditPage />
                     </MemoryRouter>
                 </QueryClientProvider>
             );
