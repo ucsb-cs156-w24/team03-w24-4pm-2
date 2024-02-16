@@ -2,7 +2,7 @@ import React from 'react'
 import { useBackend } from 'main/utils/useBackend';
 
 import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
-import RestaurantTable from 'main/components/Restaurants/RestaurantTable';
+import UCSBDiningCommonsMenuItemTable from 'main/components/UCSBDiningCommonsMenuItem/UCSBDiningCommonsMenuItemTable';
 import { useCurrentUser , hasRole} from 'main/utils/currentUser'
 import { Button } from 'react-bootstrap';
 
@@ -10,11 +10,11 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
 
     const currentUser = useCurrentUser();
 
-    const { data: restaurants, error: _error, status: _status } =
+    const { data: diningCommonMenuItems, error: _error, status: _status } =
         useBackend(
             // Stryker disable next-line all : don't test internal caching of React Query
-            ["/api/restaurants/all"],
-            { method: "GET", url: "/api/restaurants/all" },
+            ["/api/ucsbdiningcommonsmenuitem/all"],
+            { method: "GET", url: "/api/ucsbdiningcommonsmenuitem/all" },
             // Stryker disable next-line all : don't test default value of empty list
             []
         );
@@ -24,10 +24,10 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
             return (
                 <Button
                     variant="primary"
-                    href="/restaurants/create"
+                    href="/ucsbdiningcommonsmenuitems/create"
                     style={{ float: "right" }}
                 >
-                    Create Restaurant
+                    Create Menu Item
                 </Button>
             )
         } 
@@ -37,8 +37,8 @@ export default function UCSBDiningCommonsMenuItemIndexPage() {
         <BasicLayout>
             <div className="pt-2">
                 {createButton()}
-                <h1>Restaurants</h1>
-                <RestaurantTable restaurants={restaurants} currentUser={currentUser} />
+                <h1>Menu Items</h1>
+                <UCSBDiningCommonsMenuItemTable diningCommonMenuItems={diningCommonMenuItems} currentUser={currentUser} />
             </div>
         </BasicLayout>
     );
