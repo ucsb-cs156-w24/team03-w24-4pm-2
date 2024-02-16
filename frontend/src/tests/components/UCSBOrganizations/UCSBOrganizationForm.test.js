@@ -61,6 +61,7 @@ describe("UCSBOrganizationForm tests", () => {
         fireEvent.click(submitButton);
 
         await screen.findByText(/inactive must be either true or false/);
+        expect(screen.queryByText(/inactive is required/)).not.toBeInTheDocument();
     });
 
 
