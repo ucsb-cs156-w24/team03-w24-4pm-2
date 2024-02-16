@@ -38,7 +38,6 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
             <Row>
 
             {initialContents && (
-                    <Col>
                         <Form.Group className="mb-3" >
                             <Form.Label htmlFor="id">Id</Form.Label>
                             <Form.Control
@@ -50,16 +49,14 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                                 disabled
                             />
                         </Form.Group>
-                    </Col>
                 )}
 
-                <Col>
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="itemId">Item ID</Form.Label>
                         <Form.Control
                             data-testid={testIdPrefix + "-itemId"}
                             id="itemId"
-                            type="text"
+                            type="number"
                             isInvalid={Boolean(errors.itemId)}
                             {...register("itemId", { required: true, pattern: int_regex })}
                         />
@@ -68,8 +65,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             {errors.itemId?.type === 'pattern' && ' Item ID must be a positive integer'}
                         </Form.Control.Feedback>
                     </Form.Group>
-                </Col>
-                <Col>
+
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="reviewerEmail">Reviewer Email</Form.Label>
                         <Form.Control
@@ -83,14 +79,13 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             {errors.reviewerEmail && "Reviewer Email is required."}
                         </Form.Control.Feedback>
                     </Form.Group>
-                </Col>
-                <Col>
+                 
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="stars">Stars</Form.Label>
                         <Form.Control
                             data-testid={testIdPrefix + "-stars"}
                             id="stars"
-                            type="text"
+                            type="number"
                             isInvalid={Boolean(errors.stars)}
                             {...register("stars", { required: true, pattern: stars_regex})}
                         />
@@ -99,8 +94,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                         {errors.stars?.type === 'pattern' && 'Stars must be a positive integer ranging from 0-5'}
                         </Form.Control.Feedback>
                     </Form.Group>
-                </Col>                
-                <Col>
+
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="dateReviewed">Date Reviewed(iso format)</Form.Label>
                         <Form.Control
@@ -114,8 +108,7 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             {errors.dateReviewed && 'Date Reviewed is required. '}
                         </Form.Control.Feedback>
                     </Form.Group>
-                </Col>
-                <Col>
+               
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="comments">Comments</Form.Label>
                         <Form.Control
@@ -123,13 +116,12 @@ function MenuItemReviewForm({ initialContents, submitAction, buttonLabel = "Crea
                             id="comments"
                             type="text"
                             isInvalid={Boolean(errors.comments)}
-                            {...register("comments", { required: "Comments are required."})}
+                            {...register("comments")}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.comments?.message}
                         </Form.Control.Feedback>
                     </Form.Group>
-                </Col>                
             </Row>
 
             <Row>
