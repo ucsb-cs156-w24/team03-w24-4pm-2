@@ -113,6 +113,87 @@ describe("HelpRequestForm tests", () => {
         fireEvent.click(submitButton);
 
         await screen.findByText(/Requester Email must be a valid email/);
+        expect(screen.getByText(/TeamID must be a valid team id/)).toBeInTheDocument();
+    });
+
+    test("no error messsages on good input1", async () => {
+
+        const mockSubmitAction = jest.fn();
+
+
+        render(
+            <Router  >
+                <HelpRequestForm submitAction={mockSubmitAction} />
+            </Router>
+        );
+        await screen.findByTestId(`${testId}-requesterEmail`);
+
+        const requesterEmailField = screen.getByTestId(`${testId}-requesterEmail`);
+        const teamIdField = screen.getByTestId(`${testId}-teamId`);
+        const tableOrBreakoutRoomField = screen.getByTestId(`${testId}-tableOrBreakoutRoom`);
+        const requestTimeField = screen.getByTestId(`${testId}-requestTime`);
+        const explanationField = screen.getByTestId(`${testId}-explanation`);
+        const solvedField = screen.getByTestId(`${testId}-solved`);
+        const submitButton = screen.getByTestId(`${testId}-submit`);
+
+        fireEvent.change(requesterEmailField, { target: { value: 'cgaucho@gmail.com' } });
+        fireEvent.change(teamIdField, { target: { value: 'w24-12pm-2' } });
+        fireEvent.change(tableOrBreakoutRoomField, { target: { value: '6' } });
+        fireEvent.change(requestTimeField, { target: { value: '2022-01-02T12:00' } });
+        fireEvent.change(explanationField, { target: { value: 'explanation' } });
+        fireEvent.change(solvedField, { target: { value: false } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+
+        expect(screen.queryByText(/Requester Email is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Requester Email must be a valid email/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/TeamID is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/TeamID must be a valid team id/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Table Or Breakout Room is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Request time is required and must be provided in ISO format./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Explanation is required./)).not.toBeInTheDocument();
+
+    });
+
+    test("no error messsages on good input2", async () => {
+
+        const mockSubmitAction = jest.fn();
+
+
+        render(
+            <Router  >
+                <HelpRequestForm submitAction={mockSubmitAction} />
+            </Router>
+        );
+        await screen.findByTestId(`${testId}-requesterEmail`);
+
+        const requesterEmailField = screen.getByTestId(`${testId}-requesterEmail`);
+        const teamIdField = screen.getByTestId(`${testId}-teamId`);
+        const tableOrBreakoutRoomField = screen.getByTestId(`${testId}-tableOrBreakoutRoom`);
+        const requestTimeField = screen.getByTestId(`${testId}-requestTime`);
+        const explanationField = screen.getByTestId(`${testId}-explanation`);
+        const solvedField = screen.getByTestId(`${testId}-solved`);
+        const submitButton = screen.getByTestId(`${testId}-submit`);
+
+        fireEvent.change(requesterEmailField, { target: { value: 'cgaucho@gmail.com' } });
+        fireEvent.change(teamIdField, { target: { value: 'w24-4pm-2' } });
+        fireEvent.change(tableOrBreakoutRoomField, { target: { value: '6' } });
+        fireEvent.change(requestTimeField, { target: { value: '2022-01-02T12:00' } });
+        fireEvent.change(explanationField, { target: { value: 'explanation' } });
+        fireEvent.change(solvedField, { target: { value: false } });
+        fireEvent.click(submitButton);
+
+        await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
+
+        expect(screen.queryByText(/Requester Email is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Requester Email must be a valid email/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/TeamID is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/TeamID must be a valid team id/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Table Or Breakout Room is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Request time is required and must be provided in ISO format./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Explanation is required./)).not.toBeInTheDocument();
+
     });
 
 });
