@@ -76,10 +76,11 @@ function UCSBOrganizationForm({ initialContents, submitAction, buttonLabel = "Cr
                             id="inactive"
                             type="boolean"
                             isInvalid={Boolean(errors.inactive)}
-                            {...register("inactive", { required: "inactive is required." })}
+                            {...register("inactive", { required: true, validate: value => value == 'true' || value == 'false' })}
                         />
                         <Form.Control.Feedback type="invalid">
-                            {errors.inactive?.message }
+                            {errors.inactive && "inactive is required." }
+                            {errors.inactive?.type == 'validate' && 'inactive must be either true or false.'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
