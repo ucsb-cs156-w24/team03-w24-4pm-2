@@ -124,9 +124,9 @@ describe("MenuItemReviewEditPage tests", () => {
             const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
             expect(idField).toHaveValue('1');
-            expect(itemIdField).toHaveValue('5');
+            expect(itemIdField).toHaveValue(5);
             expect(reviewerEmailField).toHaveValue('angelinasuy@ucsb.edu');
-            expect(starsField).toHaveValue('3');
+            expect(starsField).toHaveValue(3);
             expect(dateReviewedField).toHaveValue('2022-01-02T12:00');
             expect(commentsField).toHaveValue('a little dry, but still good');
             expect(submitButton).toBeInTheDocument();
@@ -154,9 +154,9 @@ describe("MenuItemReviewEditPage tests", () => {
             const submitButton = screen.getByTestId("MenuItemReviewForm-submit");
 
             expect(idField).toHaveValue('1');
-            expect(itemIdField).toHaveValue('5');
+            expect(itemIdField).toHaveValue(5);
             expect(reviewerEmailField).toHaveValue('angelinasuy@ucsb.edu');
-            expect(starsField).toHaveValue('3');
+            expect(starsField).toHaveValue(3);
             expect(dateReviewedField).toHaveValue('2022-01-02T12:00');
             expect(commentsField).toHaveValue('a little dry, but still good');
 
