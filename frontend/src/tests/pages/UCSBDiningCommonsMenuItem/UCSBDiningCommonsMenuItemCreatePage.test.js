@@ -29,7 +29,7 @@ jest.mock('react-router-dom', () => {
     };
 });
 
-describe("RestaurantCreatePage tests", () => {
+describe("UCSBDiningCommonsMenuItemCreatePage tests", () => {
 
     const axiosMock = new AxiosMockAdapter(axios);
 
@@ -52,16 +52,17 @@ describe("RestaurantCreatePage tests", () => {
         );
     });
 
-    test("on submit, makes request to backend, and redirects to /restaurants", async () => {
+    test("on submit, makes request to backend, and redirects to /ucsbdiningcommonsmenuitem", async () => {
 
         const queryClient = new QueryClient();
-        const restaurant = {
+        const diningCommonMenuItem = {
             id: 3,
-            name: "South Coast Deli",
-            description: "Sandwiches and Salads"
+            name: "Pasta",
+            diningCommonsCode: "Portola",
+            station: "Bakery"
         };
 
-        axiosMock.onPost("/api/restaurants/post").reply(202, restaurant);
+        axiosMock.onPost("/api/ucsbdiningcommonsmenuitem/post").reply(202, diningCommonMenuItem);
 
         render(
             <QueryClientProvider client={queryClient}>
@@ -78,26 +79,31 @@ describe("RestaurantCreatePage tests", () => {
         const nameInput = screen.getByLabelText("Name");
         expect(nameInput).toBeInTheDocument();
 
-        const descriptionInput = screen.getByLabelText("Description");
-        expect(descriptionInput).toBeInTheDocument();
+        const diningCommonsCodeInput = screen.getByLabelText("Dining Commons Code");
+        expect(diningCommonsCodeInput).toBeInTheDocument();
+
+        const stationInput = screen.getByLabelText("Station");
+        expect(stationInput).toBeInTheDocument();
 
         const createButton = screen.getByText("Create");
         expect(createButton).toBeInTheDocument();
 
-        fireEvent.change(nameInput, { target: { value: 'South Coast Deli' } })
-        fireEvent.change(descriptionInput, { target: { value: 'Sandwiches and Salads' } })
+        fireEvent.change(nameInput, { target: { value: 'Pasta' } })
+        fireEvent.change(diningCommonsCodeInput, { target: { value: 'Portola' } })
+        fireEvent.change(stationInput, { target: { value: 'Bakery' } })
         fireEvent.click(createButton);
 
         await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
 
         expect(axiosMock.history.post[0].params).toEqual({
-            name: "South Coast Deli",
-            description: "Sandwiches and Salads"
+            name: "Pasta",
+            diningCommonsCode: "Portola",
+            station: "Bakery"
         });
 
         // assert - check that the toast was called with the expected message
-        expect(mockToast).toBeCalledWith("New restaurant Created - id: 3 name: South Coast Deli");
-        expect(mockNavigate).toBeCalledWith({ "to": "/restaurants" });
+        expect(mockToast).toBeCalledWith("New dining commons menu item Created - id: 3 name: Pasta");
+        expect(mockNavigate).toBeCalledWith({ "to": "/ucsbdiningcommonsmenuitems" });
 
     });
 });
