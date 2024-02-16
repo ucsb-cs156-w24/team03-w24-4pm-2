@@ -54,7 +54,7 @@ export default function AppNavbar({ currentUser, systemInfo, doLogout, currentUr
               {
                 hasRole(currentUser, "ROLE_USER") && (
                   <>
-                    <Nav.Link as={Link} to="/ucsborganizations">UCSBOrganizations</Nav.Link>
+                    <Nav.Link as={Link} to="/ucsborganizations">UCSB Organizations</Nav.Link>
                   </>
                 )
               }
