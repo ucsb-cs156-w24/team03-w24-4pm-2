@@ -1,26 +1,21 @@
-# STARTER-team03
+# team03-w24-4pm-2
 
 Instructions: <https://ucsb-cs156.github.io/f23/lab/team03.html>
 
-TODO: change heading above to your repo name, e.g. `# team03-f23-9am-4`
-
-TODO: Add a link to the deployed Dokku app for your team here, e.g.
-
 Deployments:
 
-* Prod: <https://team03.dokku-17.cs.ucsb.edu>
-* QA: <https://team03-qa.dokku-17.cs.ucsb.edu>
+* Prod: <https://team03.dokku-02.cs.ucsb.edu>
+* QA: <https://team03-qa.dokku-02.cs.ucsb.edu>
 
-TODO: Fill in this table with correct information. 
 
-| Table                     | Name         | Github Id |
-|---------------------------|--------------|-----------|
-| UCSBDiningCommonsMenuItem |              |           |
-| UCSBOrganization          |              |           |
-| RecommendationRequest     |              |           |
-| MenuItemReview            |              |           |
-| HelpRequest               |              |           |
-| Articles                  |              |           |
+| Name         | GitHub Id                                           | Table                       | 
+|--------------|-----------------------------------------------------|-----------------------------|
+| Bharat Kathi | [bk1031](https://github.com/bk1031)                 | `Articles`                  |
+| Alex Lim     | [alexlim-pro](https://github.com/alexlim-pro)       | `Recommendation Request`    | 
+| Angelina Suy | [ahjsuy](https://github.com/ahjsuy)                 | `Menu Item Reviews`         | 
+| Ritu Kirsur  | [rkirsur](https://github.com/bk1031)                | `Help Request`              |
+| Kyle Kumar   | [kylebkumar](https://github.com/kylebkumar)         | `UCSB Dining Commons`       | 
+| Rohan Kumar  | [rohankumar2025](https://github.com/rohankumar2025) | `UCSB Organization`         | 
 
 Remember though, that in spite of these initial  assignments, it is still
 a team project.  Please help other team members to finish their work
