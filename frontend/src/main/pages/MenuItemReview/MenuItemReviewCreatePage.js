@@ -10,13 +10,11 @@ export default function MenuItemReviewsCreatePage({storybook=false}) {
     url: "/api/menuitemreviews/post",
     method: "POST",
     params: {
-
       itemId: menuItemReview.itemId,
       reviewerEmail: menuItemReview.reviewerEmail,
       stars: menuItemReview.stars,
       dateReviewed: menuItemReview.dateReviewed,
       comments: menuItemReview.comments
-
     }
   });
 
