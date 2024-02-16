@@ -1,5 +1,5 @@
 const helpRequestFixtures = {
-    oneDate: {
+    oneHelpRequest: {
         "id": 1,
         "requesterEmail": "cgaucho@ucsb.edu",
         "teamId": "s22-5pm-3",
@@ -8,7 +8,7 @@ const helpRequestFixtures = {
         "solved": "false",
         "requestTime": "2022-01-02T12:00:00"
     },
-    threeDates: [
+    threeHelpRequests: [
         {
             "id": 1,
             "requesterEmail": "ldelplaya@ucsb.edu",
@@ -16,7 +16,7 @@ const helpRequestFixtures = {
             "tableOrBreakoutRoom": "11",
             "explanation": "Dokku problems",
             "solved": "false",
-            "localDateTime": "2022-01-02T12:00:00"
+            "requestTime": "2022-01-02T12:00:00"
         },
         {
             "id": 2,
@@ -25,7 +25,7 @@ const helpRequestFixtures = {
             "tableOrBreakoutRoom": "8",
             "explanation": "Need help with mutation tests",
             "solved": "false",
-            "localDateTime": "2022-04-03T12:00:00"
+            "requestTime": "2022-04-03T12:00:00"
         },
         {
             "id": 3,
@@ -34,7 +34,7 @@ const helpRequestFixtures = {
             "tableOrBreakoutRoom": "13",
             "explanation": "Merge conflict",
             "solved": "false",
-            "localDateTime": "2022-07-04T12:00:00"
+            "requestTime": "2022-07-04T12:00:00"
         }
     ]
 };
