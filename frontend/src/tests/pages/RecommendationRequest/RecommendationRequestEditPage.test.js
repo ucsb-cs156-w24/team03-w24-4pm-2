@@ -182,9 +182,9 @@ describe("RecommendationRequestEditPage tests", () => {
             expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
                 requesterEmail: "requester1@gmail.com",
                 professorEmail: "professor1@gmail.com",
+                explanation: "explanation1",
                 dateRequested: "2022-02-02T12:01",
                 dateNeeded: "2023-02-02T12:01",
-                explanation: "explanation1",
                 done: "true"
             })); // posted object
 
