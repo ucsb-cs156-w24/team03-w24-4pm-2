@@ -20,11 +20,9 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
     // Note that even this complex regex may still need some tweaks
 
     // Stryker disable next-line Regex
-    const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+    // const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 
     // Stryker disable next-line all
-    const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-
 
     return (
 
@@ -55,13 +53,12 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         <Form.Control
                             data-testid="RecommendationRequestForm-requesterEmail"
                             id="requesterEmail"
-                            type="text"
+                            type="email"
                             isInvalid={Boolean(errors.requesterEmail)}
-                            {...register("requesterEmail", { required: true, pattern: email_regex })}
+                            {...register("requesterEmail", { required: true })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.requesterEmail && 'Requester Email is required. '}
-                            {errors.requesterEmail?.type === 'pattern' && 'Requester Email must be a valid email address'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
@@ -71,21 +68,18 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         <Form.Control
                             data-testid="RecommendationRequestForm-professorEmail"
                             id="professorEmail"
-                            type="text"
+                            type="email"
                             isInvalid={Boolean(errors.professorEmail)}
-                            {...register("professorEmail", { required: true, pattern: email_regex })}
+                            {...register("professorEmail", { required: true })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.professorEmail && 'Professor Email is required. '}
-                            {errors.professorEmail?.type === 'pattern' && 'Professor Email must be a valid email address'}
                         </Form.Control.Feedback>
                     </Form.Group>
                 </Col>
             </Row>
-
             <Row>
-
-            <Col>
+                <Col>
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="dateRequested">Date Requested (iso format)</Form.Label>
                         <Form.Control
@@ -93,7 +87,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             id="dateRequested"
                             type="datetime-local"
                             isInvalid={Boolean(errors.dateRequested)}
-                            {...register("dateRequested", { required: true, pattern: isodate_regex })}
+                            {...register("dateRequested", { required: true })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.dateRequested && 'Date Requested is required. '}
@@ -108,7 +102,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             id="dateNeeded"
                             type="datetime-local"
                             isInvalid={Boolean(errors.dateRequested)}
-                            {...register("dateNeeded", { required: true, pattern: isodate_regex })}
+                            {...register("dateNeeded", { required: true })}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.dateNeeded && 'Date Needed is required. '}
