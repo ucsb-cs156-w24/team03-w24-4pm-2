@@ -137,17 +137,26 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                 <Col>
                     <Form.Group className="mb-3" >
                         <Form.Label htmlFor="done">Done</Form.Label>
-                        <input 
+                        {/* <input 
                             data-testid="RecommendationRequestForm-done"
                             id="done"
                             type="checkbox"
                             isInvalid={Boolean(errors.done)}
                             {...register("done", { required: false })}
+                        /> */}
+                        <Form.Control
+                            data-testid="RecommendationRequestForm-done"
+                            id="done"
+                            type="boolean"
+                            isInvalid={Boolean(errors.done)}
+                            {...register("done", { required: true })}
                         />
                         {/* <Form.Control
                             data-testid="RecommendationRequestForm-done"
                             id="done"
-                            type="checkbox"
+                            type="number"
+                            min={0}
+                            max={1}
                             isInvalid={Boolean(errors.done)}
                             {...register("done", { required: true })}
                         /> */}

@@ -50,14 +50,15 @@ export default function RecommendationRequestTable({ recommendationRequests, cur
         },
         {
             Header: 'Done',
-            accessor: 'done',
+            id: 'done',
+            accessor: (row, _rowIndex) => String(row.done) // hack needed for boolean values to show up
         }
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
         columns.push(ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestTable"));
         columns.push(ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestTable"));
-    } 
+    }
 
     return <OurTable
         data={recommendationRequests}
