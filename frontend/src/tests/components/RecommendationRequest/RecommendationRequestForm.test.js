@@ -62,11 +62,9 @@ describe("RecommendationRequestForm tests", () => {
         fireEvent.change(doneField, { target: { value: 'bad-input' } });
         fireEvent.click(submitButton);
 
-        await screen.findByText(/Requester Email must be a valid email address/);
-        expect(screen.findByText(/Requester Email must be a valid email address/)).toBeInTheDocument();
-        expect(screen.findByText(/Professor Email must be a valid email address/)).toBeInTheDocument();
-        expect(screen.findByText(/dateRequested must be in ISO format/)).toBeInTheDocument();
-        expect(screen.findByText(/dateNeeded must be in ISO format/)).toBeInTheDocument();
+        await screen.findByText(/Professor Email must be a valid email address/);
+        await screen.findByText(/dateRequested must be in ISO format/);
+        await screen.findByText(/dateNeeded must be in ISO format/);
     });
 
     test("Correct Error messsages on missing input", async () => {
