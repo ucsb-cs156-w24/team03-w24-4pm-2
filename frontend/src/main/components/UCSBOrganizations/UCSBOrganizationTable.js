@@ -51,8 +51,13 @@ export default function UCSBOrganizationTable({ orgs, currentUser }) {
         columns.push(ButtonColumn("Delete", "danger", deleteCallback, "UCSBOrganizationTable"));
     } 
 
+    const orgsWithInactiveToString = orgs.map(org => ({
+        ...org,
+        inactive: org.inactive ? 'true' : 'false'
+    }));
+
     return <OurTable
-        data={orgs}
+        data={orgsWithInactiveToString}
         columns={columns}
         testid={"UCSBOrganizationTable"}
     />;
