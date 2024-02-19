@@ -85,7 +85,7 @@ describe("RecommendationRequestForm tests", () => {
         expect(screen.getByText(/Date Requested is required./)).toBeInTheDocument();
         expect(screen.getByText(/Date Needed is required./)).toBeInTheDocument();
         expect(screen.getByText(/Explanation is required./)).toBeInTheDocument();
-
+        expect(screen.getByText(/Done is required./)).toBeInTheDocument();
     });
 
     test("No Error messsages on good input", async () => {
@@ -120,8 +120,8 @@ describe("RecommendationRequestForm tests", () => {
 
         expect(screen.queryByText(/Requester Email is required./)).not.toBeInTheDocument();
         expect(screen.queryByText(/Professor Email is required./)).not.toBeInTheDocument();
-        expect(screen.queryByText(/dateRequested is required./)).not.toBeInTheDocument();
-        expect(screen.queryByText(/dateNeeded is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Date Requested is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Date Needed is required./)).not.toBeInTheDocument();
         expect(screen.queryByText(/Explanation is required./)).not.toBeInTheDocument();
         expect(screen.queryByText(/Done is required./)).not.toBeInTheDocument();
 

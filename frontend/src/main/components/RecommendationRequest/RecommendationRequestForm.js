@@ -101,7 +101,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             data-testid="RecommendationRequestForm-dateNeeded"
                             id="dateNeeded"
                             type="datetime-local"
-                            isInvalid={Boolean(errors.dateRequested)}
+                            isInvalid={Boolean(errors.dateNeeded)}
                             {...register("dateNeeded", { required: true })}
                         />
                         <Form.Control.Feedback type="invalid">
@@ -118,8 +118,8 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             data-testid="RecommendationRequestForm-explanation"
                             id="explanation"
                             type="text"
-                            isInvalid={Boolean(errors.dateRequested)}
-                            {...register("explanation", { required: true })}
+                            isInvalid={Boolean(errors.explanation)}
+                            {...register("explanation")}
                         />
                         <Form.Control.Feedback type="invalid">
                             {errors.dateNeeded && 'Explanation is required. '}

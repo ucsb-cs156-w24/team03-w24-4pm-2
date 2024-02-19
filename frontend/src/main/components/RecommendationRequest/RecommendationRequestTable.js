@@ -15,7 +15,6 @@ export default function RecommendationRequestTable({ recommendationRequests, cur
     }
 
     // Stryker disable all : hard to test for query caching
-
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
