@@ -63,6 +63,9 @@ describe("RecommendationRequestForm tests", () => {
         fireEvent.click(submitButton);
 
         await screen.findByText(/Requester Email must be a valid email address/);
+        screen.findByText(/Professor Email must be a valid email address/);
+        screen.findByText(/dateRequested must be in ISO format/);
+        screen.findByText(/dateNeeded must be in ISO format/);
     });
 
     test("Correct Error messsages on missing input", async () => {

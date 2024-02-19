@@ -55,7 +55,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         <Form.Control
                             data-testid="RecommendationRequestForm-requesterEmail"
                             id="requesterEmail"
-                            type="email"
+                            type="text"
                             isInvalid={Boolean(errors.requesterEmail)}
                             {...register("requesterEmail", { required: true, pattern: email_regex })}
                         />
@@ -71,7 +71,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         <Form.Control
                             data-testid="RecommendationRequestForm-professorEmail"
                             id="professorEmail"
-                            type="email"
+                            type="text"
                             isInvalid={Boolean(errors.professorEmail)}
                             {...register("professorEmail", { required: true, pattern: email_regex })}
                         />
