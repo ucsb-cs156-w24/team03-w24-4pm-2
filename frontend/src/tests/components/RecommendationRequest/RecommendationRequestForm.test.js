@@ -118,11 +118,12 @@ describe("RecommendationRequestForm tests", () => {
 
         await waitFor(() => expect(mockSubmitAction).toHaveBeenCalled());
 
-        expect(screen.queryByText(/Requester Email must be a valid email address/)).not.toBeInTheDocument();
-        expect(screen.queryByText(/Professor Email must be a valid email address/)).not.toBeInTheDocument();
-        expect(screen.queryByText(/dateRequested must be in ISO format/)).not.toBeInTheDocument();
-        expect(screen.queryByText(/dateNeeded must be in ISO format/)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Requester Email is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Professor Email is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/dateRequested is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/dateNeeded is required./)).not.toBeInTheDocument();
         expect(screen.queryByText(/Explanation is required./)).not.toBeInTheDocument();
+        expect(screen.queryByText(/Done is required./)).not.toBeInTheDocument();
 
     });
 
