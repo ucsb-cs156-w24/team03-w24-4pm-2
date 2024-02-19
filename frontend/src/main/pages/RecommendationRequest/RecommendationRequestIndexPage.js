@@ -26,7 +26,7 @@ export default function RecommendationRequestIndexPage() {
   
   const { data: recommendationRequests, error: _error, status: _status } =
     useBackend(
-    //   Stryker disable all : don't test internal caching of React Query
+    // Stryker disable all : don't test internal caching of React Query
       ["/api/recommendationrequest/all"],
       { method: "GET", url: "/api/recommendationrequest/all" },
       []
