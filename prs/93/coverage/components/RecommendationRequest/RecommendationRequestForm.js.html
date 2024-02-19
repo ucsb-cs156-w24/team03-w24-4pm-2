@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>21/21</span>
+                <span class='fraction'>17/17</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>6/6</span>
+                <span class='fraction'>4/4</span>
             </div>
         
             
@@ -249,13 +249,7 @@
 <a name='L184'></a><a href='#L184'>184</a>
 <a name='L185'></a><a href='#L185'>185</a>
 <a name='L186'></a><a href='#L186'>186</a>
-<a name='L187'></a><a href='#L187'>187</a>
-<a name='L188'></a><a href='#L188'>188</a>
-<a name='L189'></a><a href='#L189'>189</a>
-<a name='L190'></a><a href='#L190'>190</a>
-<a name='L191'></a><a href='#L191'>191</a>
-<a name='L192'></a><a href='#L192'>192</a>
-<a name='L193'></a><a href='#L193'>193</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L187'></a><a href='#L187'>187</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -277,17 +271,11 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-yes">24x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -469,11 +457,9 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
     // Note that even this complex regex may still need some tweaks
 &nbsp;
     // Stryker disable next-line Regex
-    const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
+    // const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 &nbsp;
     // Stryker disable next-line all
-    const email_regex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-&nbsp;
 &nbsp;
     return (
 &nbsp;
@@ -504,13 +490,12 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         &lt;Form.Control
                             data-testid="RecommendationRequestForm-requesterEmail"
                             id="requesterEmail"
-                            type="text"
+                            type="email"
                             isInvalid={Boolean(errors.requesterEmail)}
-                            {...register("requesterEmail", { required: true, pattern: email_regex })}
+                            {...register("requesterEmail", { required: true })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.requesterEmail &amp;&amp; 'Requester Email is required. '}
-                            {errors.requesterEmail?.type === 'pattern' &amp;&amp; 'Requester Email must be a valid email address'}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
@@ -520,21 +505,18 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                         &lt;Form.Control
                             data-testid="RecommendationRequestForm-professorEmail"
                             id="professorEmail"
-                            type="text"
+                            type="email"
                             isInvalid={Boolean(errors.professorEmail)}
-                            {...register("professorEmail", { required: true, pattern: email_regex })}
+                            {...register("professorEmail", { required: true })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.professorEmail &amp;&amp; 'Professor Email is required. '}
-                            {errors.professorEmail?.type === 'pattern' &amp;&amp; 'Professor Email must be a valid email address'}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
             &lt;/Row&gt;
-&nbsp;
             &lt;Row&gt;
-&nbsp;
-            &lt;Col&gt;
+                &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
                         &lt;Form.Label htmlFor="dateRequested"&gt;Date Requested (iso format)&lt;/Form.Label&gt;
                         &lt;Form.Control
@@ -542,7 +524,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             id="dateRequested"
                             type="datetime-local"
                             isInvalid={Boolean(errors.dateRequested)}
-                            {...register("dateRequested", { required: true, pattern: isodate_regex })}
+                            {...register("dateRequested", { required: true })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.dateRequested &amp;&amp; 'Date Requested is required. '}
@@ -557,7 +539,7 @@ function RecommendationRequestForm({ initialContents, submitAction, buttonLabel 
                             id="dateNeeded"
                             type="datetime-local"
                             isInvalid={Boolean(errors.dateRequested)}
-                            {...register("dateNeeded", { required: true, pattern: isodate_regex })}
+                            {...register("dateNeeded", { required: true })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
                             {errors.dateNeeded &amp;&amp; 'Date Needed is required. '}
@@ -646,7 +628,7 @@ export default RecommendationRequestForm;
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Sun Feb 18 2024 22:21:50 GMT-0800 (Pacific Standard Time)
+                at Sun Feb 18 2024 22:30:24 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
