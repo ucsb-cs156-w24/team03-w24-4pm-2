@@ -60,7 +60,7 @@ describe("RecommendationRequestEditPage tests", () => {
                 </QueryClientProvider>
             );
             await screen.findByText("Edit RecommendationRequest");
-            expect(screen.queryByTestId("UCSBDateForm-requesterEmail")).not.toBeInTheDocument();
+            expect(screen.queryByTestId("RecommendationRequestForm-requesterEmail")).not.toBeInTheDocument();
             restoreConsole();
         });
     });
@@ -83,7 +83,7 @@ describe("RecommendationRequestEditPage tests", () => {
                 explanation: "explanation",
                 done: "false"
             });
-            axiosMock.onPut('/api/ucsbdates').reply(200, {
+            axiosMock.onPut('/api/recommendationrequest').reply(200, {
                 id: "17",
                 requesterEmail: "requester@gmail.com",
                 professorEmail: "professor@gmail.com",
