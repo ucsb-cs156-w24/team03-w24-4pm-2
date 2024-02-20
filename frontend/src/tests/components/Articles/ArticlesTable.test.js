@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { ucsbOrganizationsFixtures } from "fixtures/ucsbOrganizationsFixtures";
-import UCSBOrganizationTable from "main/components/UCSBOrganizations/UCSBOrganizationTable"
+import { articlesFixtures } from "fixtures/articlesFixtures";
+import ArticlesTable from "main/components/Articles/ArticlesTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -23,15 +23,15 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable orgs={ucsbOrganizationsFixtures.threeOrgs} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["OrgCode", "OrgTranslationShort", "OrgTranslation", "Inactive"];
-    const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
-    const testId = "UCSBOrganizationTable";
+    const expectedHeaders = ["id", "Title", "URL", "Explanation", "Email", "Date"];
+    const expectedFields = ["id", "title", "url", "explanation", "email", "dateAdded"];
+    const testId = "ArticlesTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -43,8 +43,8 @@ describe("UserTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("ZBT");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("SKY");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
     const editButton = screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).not.toBeInTheDocument();
@@ -54,22 +54,22 @@ describe("UserTable tests", () => {
 
   });
 
-  test("Has the expected column headers and content for adminUser", () => {
+  test("Has the expected colum headers and content for adminUser", () => {
 
     const currentUser = currentUserFixtures.adminUser;
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable orgs={ucsbOrganizationsFixtures.threeOrgs} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["OrgCode", "OrgTranslationShort", "OrgTranslation", "Inactive"];
-    const expectedFields = ["orgCode", "orgTranslationShort", "orgTranslation", "inactive"];
-    const testId = "UCSBOrganizationTable";
+    const expectedHeaders = ["id", "Title", "URL", "Explanation", "Email", "Date"];
+    const expectedFields = ["id", "title", "url", "explanation", "email", "dateAdded"];
+    const testId = "ArticlesTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -81,11 +81,8 @@ describe("UserTable tests", () => {
       expect(header).toBeInTheDocument();
     });
 
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("ZBT");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-inactive`)).toHaveTextContent("false");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-orgCode`)).toHaveTextContent("SKY");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-inactive`)).toHaveTextContent("true");
-
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
 
     const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
@@ -100,45 +97,45 @@ describe("UserTable tests", () => {
   test("Edit button navigates to the edit page for admin user", async () => {
 
     const currentUser = currentUserFixtures.adminUser;
-    const testId = "UCSBOrganizationTable";
 
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable orgs={ucsbOrganizationsFixtures.threeOrgs} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    await waitFor(() => { expect(screen.getByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("ZBT"); });
+    await waitFor(() => { expect(screen.getByTestId(`ArticlesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
 
-    const editButton = screen.getByTestId(`${testId}-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(`ArticlesTable-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
     
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsborganizations/edit/ZBT'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/articles/edit/1'));
 
   });
 
   test("Delete button calls delete callback", async () => {
     // arrange
     const currentUser = currentUserFixtures.adminUser;
-    const testId = "UCSBOrganizationTable"
 
     // act - render the component
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <UCSBOrganizationTable orgs={ucsbOrganizationsFixtures.threeOrgs} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
     );
 
+    const testId = "ArticlesTable";
+
     // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-0-col-orgCode`)).toHaveTextContent("ZBT");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-orgTranslationShort`)).toHaveTextContent("Zeta Beta Tau");
+    expect(await screen.findByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Test2");
 
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
@@ -148,4 +145,3 @@ describe("UserTable tests", () => {
   });
 
 });
-
