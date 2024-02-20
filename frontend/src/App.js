@@ -35,6 +35,8 @@ import "bootstrap/dist/css/bootstrap.css";
 import MenuItemReviewIndexPage from "main/pages/MenuItemReview/MenuItemReviewIndexPage";
 import MenuItemReviewEditPage from "main/pages/MenuItemReview/MenuItemReviewEditPage";
 import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
+import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
+import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
 
 
 function App() {
@@ -151,7 +153,15 @@ function App() {
                   <Route exact path="/menuitemreviews/create" element={<MenuItemReviewCreatePage />} />
                 </>
               )
-        }        
+        }      
+        {
+            hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+                <Route exact path="/articles/edit/:id" element={<ArticlesEditPage />} />
+                <Route exact path="/articles/create" element={<ArticlesCreatePage />} />
+            </>
+            )
+        }  
       </Routes>
     </BrowserRouter>
   );
