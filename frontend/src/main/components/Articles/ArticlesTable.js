@@ -2,7 +2,7 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/articlesUtils"
+import { onDeleteSuccess, cellToAxiosParamsDelete } from "main/utils/articlesUtils";
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
@@ -37,6 +37,10 @@ export default function ArticlesTable({ articles, currentUser }) {
             accessor: 'title',
         },
         {
+            Header: 'Email',
+            accessor: 'email',
+        },
+        {
             Header: 'URL',
             accessor: 'url',
         },
@@ -45,11 +49,7 @@ export default function ArticlesTable({ articles, currentUser }) {
             accessor: 'explanation',
         },
         {
-            Header: 'Email',
-            accessor: 'email',
-        },
-        {
-            Header: 'Date',
+            Header: 'Date added',
             accessor: 'dateAdded',
         }
     ];
