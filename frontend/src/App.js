@@ -26,6 +26,10 @@ import UCSBOrganizationIndexPage from "main/pages/UCSBOrganizations/UCSBOrganiza
 import UCSBOrganizationCreatePage from "main/pages/UCSBOrganizations/UCSBOrganizationCreatePage";
 import UCSBOrganizationEditPage from "main/pages/UCSBOrganizations/UCSBOrganizationEditPage";
 
+import HelpRequestIndexPage from "main/pages/HelpRequest/HelpRequestIndexPage";
+import HelpRequestCreatePage from "main/pages/HelpRequest/HelpRequestCreatePage";
+import HelpRequestEditPage from "main/pages/HelpRequest/HelpRequestEditPage";
+
 
 
 
@@ -154,6 +158,21 @@ function App() {
                   <Route exact path="/menuitemreviews/create" element={<MenuItemReviewCreatePage />} />
                 </>
               )
+        }        
+        {
+          hasRole(currentUser, "ROLE_USER") && (
+            <>
+              <Route exact path="/ucsbhelprequest" element={<HelpRequestIndexPage />} />
+            </>
+          )
+        }
+        {
+          hasRole(currentUser, "ROLE_ADMIN") && (
+            <>
+              <Route exact path="/ucsbhelprequest/edit/:id" element={<HelpRequestEditPage />} />
+              <Route exact path="/ucsbhelprequest/create" element={<HelpRequestCreatePage />} />
+            </>
+          )
         }
         {
               hasRole(currentUser, "ROLE_USER") && (
@@ -169,7 +188,7 @@ function App() {
                 <Route exact path="/articles/create" element={<ArticlesCreatePage />} />
             </>
             )
-        }  
+        }
       </Routes>
     </BrowserRouter>
   );
