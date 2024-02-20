@@ -23,14 +23,14 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "Title", "URL", "Explanation", "Email", "Date"];
-    const expectedFields = ["id", "title", "url", "explanation", "email", "dateAdded"];
+    const expectedHeaders = ["id", "Title", "Email", "URL", "Explanation", "Date added"];
+    const expectedFields = ["id", "title", "email", "url", "explanation", "dateAdded"];
     const testId = "ArticlesTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -61,14 +61,14 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "Title", "URL", "Explanation", "Email", "Date"];
-    const expectedFields = ["id", "title", "url", "explanation", "email", "dateAdded"];
+    const expectedHeaders = ["id", "Title", "Email", "URL", "Explanation", "Date added"];
+    const expectedFields = ["id", "title", "email", "url", "explanation", "dateAdded"];
     const testId = "ArticlesTable";
 
     expectedHeaders.forEach((headerText) => {
@@ -101,7 +101,7 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
@@ -118,30 +118,31 @@ describe("UserTable tests", () => {
 
   });
 
-  test("Delete button calls delete callback", async () => {
-    // arrange
+
+  test("Allow deletes to be processed", async () => {
+
     const currentUser = currentUserFixtures.adminUser;
 
-    // act - render the component
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticle} currentUser={currentUser} />
+          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
+
     );
 
+    await waitFor(() => { expect(screen.getByTestId(`ArticlesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+
     const testId = "ArticlesTable";
-
-    // assert - check that the expected content is rendered
-    expect(await screen.findByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-title`)).toHaveTextContent("Test2");
-
     const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
     expect(deleteButton).toBeInTheDocument();
-
-    // act - click the delete button
+    
     fireEvent.click(deleteButton);
+
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).not.toHaveTextContent("1");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).not.toHaveTextContent("2");
+
   });
 
 });
