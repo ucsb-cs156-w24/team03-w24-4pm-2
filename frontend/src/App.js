@@ -37,6 +37,7 @@ import MenuItemReviewEditPage from "main/pages/MenuItemReview/MenuItemReviewEdit
 import MenuItemReviewCreatePage from "main/pages/MenuItemReview/MenuItemReviewCreatePage";
 import ArticlesCreatePage from "main/pages/Articles/ArticlesCreatePage";
 import ArticlesEditPage from "main/pages/Articles/ArticlesEditPage";
+import ArticlesIndexPage from "main/pages/Articles/ArticlesIndexPage";
 
 
 function App() {
@@ -151,6 +152,13 @@ function App() {
                 <>
                   <Route exact path="/menuitemreviews/edit/:id" element={<MenuItemReviewEditPage />} />
                   <Route exact path="/menuitemreviews/create" element={<MenuItemReviewCreatePage />} />
+                </>
+              )
+        }
+        {
+              hasRole(currentUser, "ROLE_USER") && (
+                <>
+                  <Route exact path="/articles" element={<ArticlesIndexPage />} />
                 </>
               )
         }      
