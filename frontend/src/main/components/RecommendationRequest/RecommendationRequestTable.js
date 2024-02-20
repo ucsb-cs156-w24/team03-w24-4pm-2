@@ -2,24 +2,23 @@ import React from "react";
 import OurTable, { ButtonColumn } from "main/components/OurTable";
 
 import { useBackendMutation } from "main/utils/useBackend";
-import { onDeleteSuccess, cellToAxiosParamsDelete } from "main/utils/articlesUtils";
+import { cellToAxiosParamsDelete, onDeleteSuccess } from "main/utils/RecommendationRequestUtils"
 import { useNavigate } from "react-router-dom";
 import { hasRole } from "main/utils/currentUser";
 
-export default function ArticlesTable({ articles, currentUser }) {
+export default function RecommendationRequestTable({ recommendationRequests, currentUser }) {
 
     const navigate = useNavigate();
 
     const editCallback = (cell) => {
-        navigate(`/articles/edit/${cell.row.values.id}`)
+        navigate(`/recommendationrequest/edit/${cell.row.values.id}`)
     }
 
     // Stryker disable all : hard to test for query caching
-
     const deleteMutation = useBackendMutation(
         cellToAxiosParamsDelete,
         { onSuccess: onDeleteSuccess },
-        ["/api/articles/all"]
+        ["/api/recommendationrequest/all"]
     );
     // Stryker restore all 
 
@@ -33,35 +32,36 @@ export default function ArticlesTable({ articles, currentUser }) {
             accessor: 'id', // accessor is the "key" in the data
         },
         {
-            Header: 'Title',
-            accessor: 'title',
+            Header: 'Requester Email',
+            accessor: 'requesterEmail',
         },
         {
-            Header: 'Email',
-            accessor: 'email',
+            Header: 'Professor Email',
+            accessor: 'professorEmail',
         },
         {
-            Header: 'URL',
-            accessor: 'url',
+            Header: 'Date Requested',
+            accessor: 'dateRequested',
         },
         {
-            Header: 'Explanation',
-            accessor: 'explanation',
+            Header: 'Date Needed',
+            accessor: 'dateNeeded',
         },
         {
-            Header: 'Date added',
-            accessor: 'dateAdded',
+            Header: 'Done',
+            id: 'done',
+            accessor: (row, _rowIndex) => String(row.done) // hack needed for boolean values to show up
         }
     ];
 
     if (hasRole(currentUser, "ROLE_ADMIN")) {
-        columns.push(ButtonColumn("Edit", "primary", editCallback, "ArticlesTable"));
-        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "ArticlesTable"));
-    } 
+        columns.push(ButtonColumn("Edit", "primary", editCallback, "RecommendationRequestTable"));
+        columns.push(ButtonColumn("Delete", "danger", deleteCallback, "RecommendationRequestTable"));
+    }
 
     return <OurTable
-        data={articles}
+        data={recommendationRequests}
         columns={columns}
-        testid={"ArticlesTable"}
+        testid={"RecommendationRequestTable"}
     />;
 };

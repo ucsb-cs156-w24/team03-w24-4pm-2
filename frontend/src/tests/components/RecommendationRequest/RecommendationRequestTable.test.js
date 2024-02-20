@@ -1,6 +1,6 @@
 import { fireEvent, render, waitFor, screen } from "@testing-library/react";
-import { articlesFixtures } from "fixtures/articlesFixtures";
-import ArticlesTable from "main/components/Articles/ArticlesTable"
+import { recommendationRequestFixtures } from "fixtures/recommendationRequestFixtures";
+import RecommendationRequestTable from "main/components/RecommendationRequest/RecommendationRequestTable"
 import { QueryClient, QueryClientProvider } from "react-query";
 import { MemoryRouter } from "react-router-dom";
 import { currentUserFixtures } from "fixtures/currentUserFixtures";
@@ -23,15 +23,15 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <RecommendationRequestTable recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "Title", "Email", "URL", "Explanation", "Date added"];
-    const expectedFields = ["id", "title", "email", "url", "explanation", "dateAdded"];
-    const testId = "ArticlesTable";
+    const expectedHeaders = ["id", "Requester Email", "Professor Email", "Date Requested", "Date Needed", "Done"];
+    const expectedFields = ["id", "requesterEmail", "professorEmail", "dateRequested", "dateNeeded", "done"];
+    const testId = "RecommendationRequestTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -45,6 +45,8 @@ describe("UserTable tests", () => {
 
     expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).toHaveTextContent("1");
     expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).toHaveTextContent("2");
+    expect(screen.getByTestId(`${testId}-cell-row-0-col-done`)).toHaveTextContent("false");
+    expect(screen.getByTestId(`${testId}-cell-row-1-col-done`)).toHaveTextContent("true");
 
     const editButton = screen.queryByTestId(`${testId}-cell-row-0-col-Edit-button`);
     expect(editButton).not.toBeInTheDocument();
@@ -61,15 +63,15 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <RecommendationRequestTable recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    const expectedHeaders = ["id", "Title", "Email", "URL", "Explanation", "Date added"];
-    const expectedFields = ["id", "title", "email", "url", "explanation", "dateAdded"];
-    const testId = "ArticlesTable";
+    const expectedHeaders = ["id", "Requester Email", "Professor Email", "Date Requested", "Date Needed", "Done"];
+    const expectedFields = ["id", "requesterEmail", "professorEmail", "dateRequested", "dateNeeded", "done"];
+    const testId = "RecommendationRequestTable";
 
     expectedHeaders.forEach((headerText) => {
       const header = screen.getByText(headerText);
@@ -101,48 +103,22 @@ describe("UserTable tests", () => {
     render(
       <QueryClientProvider client={queryClient}>
         <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
+          <RecommendationRequestTable recommendationRequests={recommendationRequestFixtures.threeRecommendationRequests} currentUser={currentUser} />
         </MemoryRouter>
       </QueryClientProvider>
 
     );
 
-    await waitFor(() => { expect(screen.getByTestId(`ArticlesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
+    await waitFor(() => { expect(screen.getByTestId(`RecommendationRequestTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
 
-    const editButton = screen.getByTestId(`ArticlesTable-cell-row-0-col-Edit-button`);
+    const editButton = screen.getByTestId(`RecommendationRequestTable-cell-row-0-col-Edit-button`);
     expect(editButton).toBeInTheDocument();
     
     fireEvent.click(editButton);
 
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/articles/edit/1'));
-
-  });
-
-
-  test("Allow deletes to be processed", async () => {
-
-    const currentUser = currentUserFixtures.adminUser;
-
-    render(
-      <QueryClientProvider client={queryClient}>
-        <MemoryRouter>
-          <ArticlesTable articles={articlesFixtures.threeArticles} currentUser={currentUser} />
-        </MemoryRouter>
-      </QueryClientProvider>
-
-    );
-
-    await waitFor(() => { expect(screen.getByTestId(`ArticlesTable-cell-row-0-col-id`)).toHaveTextContent("1"); });
-
-    const testId = "ArticlesTable";
-    const deleteButton = screen.getByTestId(`${testId}-cell-row-0-col-Delete-button`);
-    expect(deleteButton).toBeInTheDocument();
-    
-    fireEvent.click(deleteButton);
-
-    expect(screen.getByTestId(`${testId}-cell-row-1-col-id`)).not.toHaveTextContent("1");
-    expect(screen.getByTestId(`${testId}-cell-row-0-col-id`)).not.toHaveTextContent("2");
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/recommendationrequest/edit/1'));
 
   });
 
 });
+

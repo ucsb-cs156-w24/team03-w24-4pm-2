@@ -1,44 +1,45 @@
 import React from 'react';
-import ArticlesTable from "main/components/Articles/ArticlesTable";
-import { articlesFixtures } from 'fixtures/articlesFixtures';
+import RecommendationRequestTable from "main/components/RecommendationRequest/RecommendationRequestTable";
+import { recommendationRequestFixtures } from 'fixtures/recommendationRequestFixtures';
 import { currentUserFixtures } from 'fixtures/currentUserFixtures';
 import { rest } from "msw";
 
 export default {
-    title: 'components/Articles/ArticlesTable',
-    component: ArticlesTable
+    title: 'components/RecommendationRequest/RecommendationRequestTable',
+    component: RecommendationRequestTable
 };
 
 const Template = (args) => {
     return (
-        <ArticlesTable {...args} />
+        <RecommendationRequestTable {...args} />
     )
 };
 
 export const Empty = Template.bind({});
 
 Empty.args = {
-    articles: []
+    recommendationRequests: []
 };
 
 export const ThreeItemsOrdinaryUser = Template.bind({});
 
 ThreeItemsOrdinaryUser.args = {
-    articles: articlesFixtures.threeArticles,
+    recommendationRequests: recommendationRequestFixtures.threeRecommendationRequests,
     currentUser: currentUserFixtures.userOnly,
 };
 
 export const ThreeItemsAdminUser = Template.bind({});
 ThreeItemsAdminUser.args = {
-    articles: articlesFixtures.threeArticles,
+    recommendationRequests: recommendationRequestFixtures.threeRecommendationRequests,
     currentUser: currentUserFixtures.adminUser,
 }
 
 ThreeItemsAdminUser.parameters = {
     msw: [
-        rest.delete('/api/articles', (req, res, ctx) => {
+        rest.delete('/api/recommendationrequest', (req, res, ctx) => {
             window.alert("DELETE: " + JSON.stringify(req.url));
             return res(ctx.status(200),ctx.json({}));
         }),
     ]
 };
+
