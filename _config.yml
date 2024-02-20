@@ -23,4 +23,4 @@ repo_name: "TBD"
 repo: ucsb-cs156-w24/team03-w24-4pm-2
 owner: ucsb-cs156-w24
 repo_name: team03-w24-4pm-2
-pull_requests: [{"author":{"id":"MDQ6VXNlcjYxNjM1Njk1","is_bot":false,"login":"rkirsur","name":"Ritu Kirsur"},"headRefName":"rk-HelpRequest-placeholders","number":95,"title":"Ritu help request placeholders added","url":"https://github.com/ucsb-cs156-w24/team03-w24-4pm-2/pull/95"},{"author":{"id":"MDQ6VXNlcjYxNjM1Njk1","is_bot":false,"login":"rkirsur","name":"Ritu Kirsur"},"headRefName":"rk-HelpRequest-table","number":94,"title":"Ritu help request table implemented","url":"https://github.com/ucsb-cs156-w24/team03-w24-4pm-2/pull/94"}]
+pull_requests: [{"author":{"id":"MDQ6VXNlcjYxNjM1Njk1","is_bot":false,"login":"rkirsur","name":"Ritu Kirsur"},"headRefName":"rk-HelpRequest-placeholders","number":95,"title":"Ritu help request placeholders added","url":"https://github.com/ucsb-cs156-w24/team03-w24-4pm-2/pull/95"}]
