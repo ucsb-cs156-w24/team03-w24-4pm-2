@@ -25,14 +25,14 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Statements</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Branches</span>
-                <span class='fraction'>7/7</span>
+                <span class='fraction'>15/15</span>
             </div>
         
             
@@ -46,7 +46,7 @@
             <div class='fl pad1y space-right2'>
                 <span class="strong">100% </span>
                 <span class="quiet">Lines</span>
-                <span class='fraction'>5/5</span>
+                <span class='fraction'>7/7</span>
             </div>
         
             
@@ -229,7 +229,11 @@
 <a name='L164'></a><a href='#L164'>164</a>
 <a name='L165'></a><a href='#L165'>165</a>
 <a name='L166'></a><a href='#L166'>166</a>
-<a name='L167'></a><a href='#L167'>167</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
+<a name='L167'></a><a href='#L167'>167</a>
+<a name='L168'></a><a href='#L168'>168</a>
+<a name='L169'></a><a href='#L169'>169</a>
+<a name='L170'></a><a href='#L170'>170</a>
+<a name='L171'></a><a href='#L171'>171</a></td><td class="line-coverage quiet"><span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -240,24 +244,28 @@
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
-<span class="cline-any cline-neutral">&nbsp;</span>
-<span class="cline-any cline-yes">8x</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
+<span class="cline-any cline-neutral">&nbsp;</span>
+<span class="cline-any cline-yes">24x</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
 <span class="cline-any cline-neutral">&nbsp;</span>
@@ -419,6 +427,14 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
 &nbsp;
+    // Stryker disable next-line Regex
+    // eslint-disable-next-line
+    const url_regex = /(http(s)?:\/\/.)?(www\.)?[-a-zA-Z0-9@:%._\+~#=]{2,256}\.[a-z]{2,6}\b([-a-zA-Z0-9@:%_\+.~#?&amp;//=]*)/i;
+&nbsp;
+    // Stryker disable next-line Regex
+    // eslint-disable-next-line
+    const email_regex = /^[\w-\.]+@([\w-]+\.)+[\w-]{2,4}$/g;
+&nbsp;
     return (
 &nbsp;
         &lt;Form onSubmit={handleSubmit(submitAction)}&gt;
@@ -459,10 +475,7 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
-            &lt;/Row&gt;
-&nbsp;
-            &lt;Row&gt;
-&nbsp;
+                
                 &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
                         &lt;Form.Label htmlFor="url"&gt;URL&lt;/Form.Label&gt;
@@ -472,17 +485,37 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                             type="text"
                             isInvalid={Boolean(errors.url)}
                             {...register("url", {
-                                required: "URL is required."
+                                required: "URL is required.",
+                                pattern: url_regex
                             })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.url?.message}
+                            {errors.url &amp;&amp; 'URL is required. '}
+                            {errors.url?.type === 'pattern' &amp;&amp; 'URL must be a valid address (e.g. google.com, http://google.com, https://google.com)'}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
-            &lt;/Row&gt;
 &nbsp;
-            &lt;Row&gt;    
+                &lt;Col&gt;
+                    &lt;Form.Group className="mb-3" &gt;
+                        &lt;Form.Label htmlFor="email"&gt;Email&lt;/Form.Label&gt;
+                        &lt;Form.Control
+                            data-testid="ArticlesForm-email"
+                            id="email"
+                            type="text"
+                            isInvalid={Boolean(errors.email)}
+                            {...register("email", {
+                                required: "Email is required.",
+                                pattern: email_regex
+                            })}
+                        /&gt;
+                        &lt;Form.Control.Feedback type="invalid"&gt;
+                            {errors.email &amp;&amp; 'Email is required. '}
+                            {errors.email?.type === 'pattern' &amp;&amp; 'Email must be a valid address (e.g. test@gmail.com, xd@yahoo.com)'}
+                        &lt;/Form.Control.Feedback&gt;
+                    &lt;/Form.Group&gt;
+                &lt;/Col&gt;
+&nbsp;
                 &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
                         &lt;Form.Label htmlFor="explanation"&gt;Explanation&lt;/Form.Label&gt;
@@ -500,30 +533,10 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
-            &lt;/Row&gt;
-&nbsp;
-            &lt;Row&gt;  
-                &lt;Col&gt;
-                    &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="email"&gt;Email&lt;/Form.Label&gt;
-                        &lt;Form.Control
-                            data-testid="ArticlesForm-email"
-                            id="email"
-                            type="text"
-                            isInvalid={Boolean(errors.email)}
-                            {...register("email", {
-                                required: "Email is required."
-                            })}
-                        /&gt;
-                        &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.email?.message}
-                        &lt;/Form.Control.Feedback&gt;
-                    &lt;/Form.Group&gt;
-                &lt;/Col&gt;
 &nbsp;
                 &lt;Col&gt;
                     &lt;Form.Group className="mb-3" &gt;
-                        &lt;Form.Label htmlFor="dateAdded"&gt;Date (iso format)&lt;/Form.Label&gt;
+                        &lt;Form.Label htmlFor="dateAdded"&gt;Date Added (iso format)&lt;/Form.Label&gt;
                         &lt;Form.Control
                             data-testid="ArticlesForm-dateAdded"
                             id="dateAdded"
@@ -532,12 +545,11 @@ function ArticlesForm({ initialContents, submitAction, buttonLabel = "Create" })
                             {...register("dateAdded", { required: true, pattern: isodate_regex })}
                         /&gt;
                         &lt;Form.Control.Feedback type="invalid"&gt;
-                            {errors.dateAdded &amp;&amp; 'DateAdded is required. '}
+                            {errors.dateAdded &amp;&amp; 'Date added is required. '}
                         &lt;/Form.Control.Feedback&gt;
                     &lt;/Form.Group&gt;
                 &lt;/Col&gt;
             &lt;/Row&gt;
-&nbsp;
 &nbsp;
             &lt;Row&gt;
                 &lt;Col&gt;
@@ -568,7 +580,7 @@ export default ArticlesForm;</pre></td></tr></table></pre>
             <div class='footer quiet pad2 space-top1 center small'>
                 Code coverage generated by
                 <a href="https://istanbul.js.org/" target="_blank" rel="noopener noreferrer">istanbul</a>
-                at Mon Feb 19 2024 23:46:18 GMT-0800 (Pacific Standard Time)
+                at Mon Feb 19 2024 23:58:18 GMT-0800 (Pacific Standard Time)
             </div>
         <script src="../../prettify.js"></script>
         <script>
