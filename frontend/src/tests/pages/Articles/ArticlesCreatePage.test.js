@@ -64,6 +64,7 @@ describe("ArticlesCreatePage tests", () => {
 
         axiosMock.onPost("/api/articles/post").reply( 202, article );
 
+
         render(
             <QueryClientProvider client={queryClient}>
                 <MemoryRouter>
@@ -107,6 +108,5 @@ describe("ArticlesCreatePage tests", () => {
         expect(mockToast).toBeCalledWith("New article Created - id: 17 title: title");
         expect(mockNavigate).toBeCalledWith({ "to": "/articles" });
     });
-
-
+      
 });

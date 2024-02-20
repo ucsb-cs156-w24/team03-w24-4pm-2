@@ -28,6 +28,7 @@ describe("ArticlesIndexPage tests", () => {
 
     const testId = "ArticlesTable";
 
+
     const setupUserOnly = () => {
         axiosMock.reset();
         axiosMock.resetHistory();
@@ -72,6 +73,7 @@ describe("ArticlesIndexPage tests", () => {
         setupUserOnly();
         const queryClient = new QueryClient();
         axiosMock.onGet("/api/articles/all").reply(200, articlesFixtures.threeArticles);
+
 
         // act
         render(
