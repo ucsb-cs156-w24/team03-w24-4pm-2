@@ -149,6 +149,27 @@ describe("AppNavbar tests", () => {
         expect(link.getAttribute("href")).toBe("/ucsbdates");
     });
 
+    test("renders the ucsborganizations link correctly", async () => {
+
+        const currentUser = currentUserFixtures.userOnly;
+        const systemInfo = systemInfoFixtures.showingBoth;
+
+        const doLogin = jest.fn();
+
+        render(
+            <QueryClientProvider client={queryClient}>
+                <MemoryRouter>
+                    <AppNavbar currentUser={currentUser} systemInfo={systemInfo} doLogin={doLogin} />
+                </MemoryRouter>
+            </QueryClientProvider>
+        );
+
+        await screen.findByText("UCSB Organizations");
+        const link = screen.getByText("UCSB Organizations");
+        expect(link).toBeInTheDocument();
+        expect(link.getAttribute("href")).toBe("/ucsborganizations");
+    });
+
     test("renders the restaurants link correctly", async () => {
 
         const currentUser = currentUserFixtures.userOnly;

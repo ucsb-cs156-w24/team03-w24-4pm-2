@@ -37,6 +37,33 @@ describe("UCSBOrganizationForm tests", () => {
         expect(screen.getByTestId(/UCSBOrganizationForm-orgCode/)).toHaveValue("ZBT");
     });
 
+    test("Correct Error message if invalid is filled with non-boolean value", async () => {
+        const mockSubmitAction = jest.fn();
+
+        render(
+            <Router  >
+                <UCSBOrganizationForm submitAction={mockSubmitAction} initialContents={{}}/>
+            </Router>
+        );
+
+        await screen.findByTestId("UCSBOrganizationForm-orgCode");
+
+        const orgCodeField = screen.getByTestId("UCSBOrganizationForm-orgCode");
+        const orgTranslationShortField = screen.getByTestId("UCSBOrganizationForm-orgTranslationShort");
+        const orgTranslationField = screen.getByTestId("UCSBOrganizationForm-orgTranslation");
+        const inactiveField = screen.getByTestId("UCSBOrganizationForm-inactive");
+        const submitButton = screen.getByTestId("UCSBOrganizationForm-submit");
+
+        fireEvent.change(orgCodeField, { target: { value: 'ZBT' } });
+        fireEvent.change(orgTranslationShortField, { target: { value: 'Zeta Beta Tau' } });
+        fireEvent.change(orgTranslationField, { target: { value: 'Zeta Beta Tau at UCSB' } });
+        fireEvent.change(inactiveField, { target: { value: 'invalid-input' } });
+        fireEvent.click(submitButton);
+
+        await screen.findByText(/inactive must be either true or false/);
+        expect(screen.queryByText(/inactive is required/)).not.toBeInTheDocument();
+    });
+
 
     test("Correct Error messages on missing input", async () => {
 
