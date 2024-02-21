@@ -17,7 +17,7 @@ describe("HelpRequestForm tests", () => {
     const queryClient = new QueryClient();
 
     const expectedHeaders = ["Requester Email", "TeamID", "Table Or Breakout Room", "Request Time ISO Format", "Explanation", "Solved"];
-    const testId = "HelpRequestForm";
+    //const testId = "HelpRequestForm";
 
     test("renders correctly with no initialContents", async () => {
         render(
