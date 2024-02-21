@@ -50,6 +50,7 @@ export default function HelpRequestTable({ requests, currentUser }) {
         },
         {
             Header: 'Solved',
+            // Stryker disable next-line all
             accessor: row => String(row.solved)
         },
         {

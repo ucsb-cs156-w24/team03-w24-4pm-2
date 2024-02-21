@@ -170,9 +170,18 @@ describe("HelpRequestEditPage tests", () => {
             await waitFor(() => expect(mockToast).toBeCalled());
             expect(mockToast).toBeCalledWith("Help Request Updated - id: 3 requesterEmail: gaucho@ucsb.edu");
             expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" });
-        });
 
-       
+            expect(axiosMock.history.put.length).toBe(1);
+            expect(axiosMock.history.put[0].params).toEqual({ id: 3 });
+            expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
+                requesterEmail: "gaucho@ucsb.edu",
+                teamId: "s23-5pm-3",
+                tableOrBreakoutRoom: "8",
+                explanation: "Need help with mutation tests",
+                solved: false,
+                requestTime: "2023-12-25T08:00"
+            }))
+        });
     });
 });
 

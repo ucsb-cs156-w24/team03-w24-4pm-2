@@ -108,6 +108,17 @@ describe("HelpRequestCreatePage tests", () => {
 
         expect(mockToast).toBeCalledWith("New help request Created - id: 17 requesterEmail: cgaucho@ucsb.edu teamId: s22-5pm-3");
         expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" });
+
+        await waitFor(() => expect(axiosMock.history.post.length).toBe(1));
+
+        expect(axiosMock.history.post[0].params).toEqual({
+            requesterEmail: "cgaucho@ucsb.edu",
+            teamId: "s22-5pm-3",
+            tableOrBreakoutRoom: "7",
+            explanation: "Need help with Swagger-ui",
+            solved: true,
+            requestTime: "2022-01-02T12:00"
+    });
     });
 
 });
