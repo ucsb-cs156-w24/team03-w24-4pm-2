@@ -72,9 +72,9 @@ public class HelpRequestController extends ApiController {
         helpRequest.setSolved(solved);
         helpRequest.setRequestTime(requestTime);
 
-        HelpRequest savedHelprequest = helpRequestRepository.save(helprequest);
+        HelpRequest savedHelpRequest = helpRequestRepository.save(helpRequest);
 
-        return savedUcsbHelpRequest;
+        return savedHelpRequest;
     }
 
     @Operation(summary= "Get a single help request")
@@ -82,18 +82,18 @@ public class HelpRequestController extends ApiController {
     @GetMapping("")
     public HelpRequest getById(
             @Parameter(name="id") @RequestParam Long id) {
-                HelpRequest ucsbHelpRequest = helpRequestRepository.findById(id)
+                HelpRequest helpRequest = helpRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
 
-        return ucsbHelpRequest;
+        return helpRequest;
     }
 
     @Operation(summary= "Delete a help request")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @DeleteMapping("")
-    public Object deleteUCSBHelpRequest(
+    public Object deleteHelpRequest(
             @Parameter(name="id") @RequestParam Long id) {
-                HelpRequest ucsbHelpRequest = helpRequestRepository.findById(id)
+                HelpRequest helpRequest = helpRequestRepository.findById(id)
                 .orElseThrow(() -> new EntityNotFoundException(HelpRequest.class, id));
 
                 helpRequestRepository.delete(helpRequest);
@@ -103,7 +103,7 @@ public class HelpRequestController extends ApiController {
     @Operation(summary= "Update a single help request")
     @PreAuthorize("hasRole('ROLE_ADMIN')")
     @PutMapping("")
-    public HelpRequest updateUCSBHelpRequest(
+    public HelpRequest updateHelpRequest(
             @Parameter(name="id") @RequestParam Long id,
             @RequestBody @Valid HelpRequest incoming) {
 

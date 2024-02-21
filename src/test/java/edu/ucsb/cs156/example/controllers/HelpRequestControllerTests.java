@@ -120,7 +120,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void an_admin_user_can_post_a_new_ucsbhelprequest() throws Exception {
+        public void an_admin_user_can_post_a_new_helprequest() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-04-20T17:35");
@@ -204,14 +204,14 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                 verify(helpRequestRepository, times(1)).findById(eq(7L));
                 Map<String, Object> json = responseToJson(response);
                 assertEquals("EntityNotFoundException", json.get("type"));
-                assertEquals("UCSBHelpRequest with id 7 not found", json.get("message"));
+                assertEquals("HelpRequest with id 7 not found", json.get("message"));
         }
 
         // Tests for DELETE /api/helprequest?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_delete_a_ucsbhelprequest() throws Exception {
+        public void admin_can_delete_a_helprequest() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-04-21T14:15");
@@ -238,12 +238,12 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                 verify(helpRequestRepository, times(1)).delete(any());
 
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("UCSBHelpRequest with id 15 deleted", json.get("message"));
+                assertEquals("HelpRequest with id 15 deleted", json.get("message"));
         }
         
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_tries_to_delete_non_existant_ucsbhelprequest_and_gets_right_error_message()
+        public void admin_tries_to_delete_non_existant_helprequest_and_gets_right_error_message()
                         throws Exception {
                 // arrange
 
@@ -258,14 +258,14 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                 // assert
                 verify(helpRequestRepository, times(1)).findById(15L);
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("UCSBHelpRequest with id 15 not found", json.get("message"));
+                assertEquals("HelpRequest with id 15 not found", json.get("message"));
         }
 
         // Tests for PUT /api/helprequest?id=... 
 
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_can_edit_an_existing_ucsbhelprequest() throws Exception {
+        public void admin_can_edit_an_existing_helprequest() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-04-20T17:35");
@@ -312,7 +312,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
         
         @WithMockUser(roles = { "ADMIN", "USER" })
         @Test
-        public void admin_cannot_edit_ucsbhelprequest_that_does_not_exist() throws Exception {
+        public void admin_cannot_edit_helprequest_that_does_not_exist() throws Exception {
                 // arrange
 
                 LocalDateTime ldt1 = LocalDateTime.parse("2022-04-20T17:35");
@@ -342,7 +342,7 @@ public class HelpRequestControllerTests extends ControllerTestCase {
                 // assert
                 verify(helpRequestRepository, times(1)).findById(67L);
                 Map<String, Object> json = responseToJson(response);
-                assertEquals("UCSBHelpRequest with id 67 not found", json.get("message"));
+                assertEquals("HelpRequest with id 67 not found", json.get("message"));
 
         }
 
