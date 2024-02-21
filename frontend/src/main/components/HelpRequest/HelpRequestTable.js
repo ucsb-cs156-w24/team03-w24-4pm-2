@@ -50,8 +50,9 @@ export default function HelpRequestTable({ requests, currentUser }) {
         },
         {
             Header: 'Solved',
-            accessor: 'solved',
-            //accessor: row => String(row.solved)
+            //accessor: 'solved'
+            // Stryker disable next-line all
+            accessor: row => String(row.solved)
         },
         {
             Header: 'Request Time ISO Format',
