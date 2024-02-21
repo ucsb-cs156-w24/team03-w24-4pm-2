@@ -57,11 +57,11 @@ describe("HelpRequestCreatePage tests", () => {
         const helprequest = {
             id: 17,
             requesterEmail: "cgaucho@ucsb.edu",
-            teamId: "s22-5pm-3",
+            teamId: "w22-5pm-3",
             tableOrBreakoutRoom: "7",
             explanation: "Need help with Swagger-ui",
             solved: false,
-            requestTime: "2022-01-02T12:00"
+            requestTime: "2022-01-02T12:00:00"
         };
 
         axiosMock.onPost("/api/ucsbhelprequest/post").reply( 202, helprequest );
@@ -88,7 +88,7 @@ describe("HelpRequestCreatePage tests", () => {
         const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
         fireEvent.change(requesterEmailField, { target: { value: 'cgaucho@ucsb.edu' } });
-        fireEvent.change(teamIdField, { target: { value: 's22-5pm-3' } });
+        fireEvent.change(teamIdField, { target: { value: 'w22-5pm-3' } });
         fireEvent.change(tableOrBreakoutRoomField, { target: { value: '7' } });
         fireEvent.change(explanationField, { target: { value: 'Need help with Swagger-ui' } });
         //fireEvent.change(solvedField, { target: { value: "false" } });
@@ -107,7 +107,7 @@ describe("HelpRequestCreatePage tests", () => {
         expect(axiosMock.history.post[0].params).toEqual(
             {
                 requesterEmail: "cgaucho@ucsb.edu",
-                teamId: "s22-5pm-3",
+                teamId: "w22-5pm-3",
                 tableOrBreakoutRoom: "7",
                 explanation: "Need help with Swagger-ui",
                 solved: false,

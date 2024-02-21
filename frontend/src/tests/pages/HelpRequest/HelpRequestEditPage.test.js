@@ -76,7 +76,7 @@ describe("HelpRequestEditPage tests", () => {
             axiosMock.onGet("/api/ucsbhelprequest", { params: { id: 17 } }).reply(200, {
                 id: 17,
                 requesterEmail: "cgaucho@ucsb.edu",
-                teamId: "s22-5pm-3",
+                teamId: "w22-5pm-3",
                 tableOrBreakoutRoom: "7",
                 explanation: "Need help with Swagger-ui",
                 solved: false,
@@ -85,7 +85,7 @@ describe("HelpRequestEditPage tests", () => {
             axiosMock.onPut('/api/ucsbhelprequest').reply(200, {
                 id: "17",
                 requesterEmail: "gaucho@ucsb.edu",
-                teamId: "s23-5pm-3",
+                teamId: "w23-5pm-3",
                 tableOrBreakoutRoom: "8",
                 explanation: "Need help with mutation tests",
                 solved: true,
@@ -118,7 +118,7 @@ describe("HelpRequestEditPage tests", () => {
 
             expect(idField).toHaveValue("17");
             expect(requesterEmailField).toHaveValue("cgaucho@ucsb.edu");
-            expect(teamIdField).toHaveValue("s22-5pm-3");
+            expect(teamIdField).toHaveValue("w22-5pm-3");
             expect(tableOrBreakoutRoomField).toHaveValue("7");
             expect(explanationField).toHaveValue("Need help with Swagger-ui");
             expect(solvedField).not.toBeChecked();
@@ -126,23 +126,6 @@ describe("HelpRequestEditPage tests", () => {
             expect(submitButton).toBeInTheDocument();
 
             expect(submitButton).toHaveTextContent("Update");
-
-            // fireEvent.change(nameField, { target: { value: 'Freebirds World Burrito' } });
-            // fireEvent.change(descriptionField, { target: { value: 'Totally Giant Burritos' } });
-            // fireEvent.click(submitButton);
-
-            // await waitFor(() => expect(mockToast).toBeCalled());
-            // expect(mockToast).toBeCalledWith("Restaurant Updated - id: 17 name: Freebirds World Burrito");
-            
-            // expect(mockNavigate).toBeCalledWith({ "to": "/ucsbhelprequest" });
-
-            // expect(axiosMock.history.put.length).toBe(1); // times called
-            // expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
-            // expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
-            //     name: 'Freebirds World Burrito',
-            //     description: 'Totally Giant Burritos'
-            // })); // posted object
-
 
         });
 
@@ -169,7 +152,7 @@ describe("HelpRequestEditPage tests", () => {
 
             expect(idField).toHaveValue("17");
             expect(requesterEmailField).toHaveValue("cgaucho@ucsb.edu");
-            expect(teamIdField).toHaveValue("s22-5pm-3");
+            expect(teamIdField).toHaveValue("w22-5pm-3");
             expect(tableOrBreakoutRoomField).toHaveValue("7");
             expect(explanationField).toHaveValue("Need help with Swagger-ui");
             expect(solvedField).not.toBeChecked();
@@ -177,7 +160,7 @@ describe("HelpRequestEditPage tests", () => {
             expect(submitButton).toBeInTheDocument();
 
             fireEvent.change(requesterEmailField, { target: { value: 'gaucho@ucsb.edu' } });
-            fireEvent.change(teamIdField, { target: { value: 's23-5pm-3' } });
+            fireEvent.change(teamIdField, { target: { value: 'w23-5pm-3' } });
             fireEvent.change(tableOrBreakoutRoomField, { target: { value: '8' } });
             fireEvent.change(requestTimeField, { target: { value: "2023-12-25T08:00" } });
             fireEvent.change(explanationField, { target: { value: 'Need help with mutation tests' } });
@@ -188,9 +171,20 @@ describe("HelpRequestEditPage tests", () => {
             await waitFor(() => expect(mockToast).toBeCalled());
             expect(mockToast).toBeCalledWith("Help Request Updated - id: 17 requesterEmail: gaucho@ucsb.edu");
             expect(mockNavigate).toBeCalledWith({ "to": "/ucsbhelprequest" });
+
+            expect(axiosMock.history.put.length).toBe(1);
+            expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
+            expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
+                requesterEmail: "gaucho@ucsb.edu",
+                teamId: "w23-5pm-3",
+                tableOrBreakoutRoom: "8",
+                explanation: "Need help with mutation tests",
+                solved: true,
+                requestTime: "2023-12-25T08:00"
+            })) 
         });
 
-       
     });
+
 });
 
