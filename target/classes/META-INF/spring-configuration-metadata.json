@@ -1,0 +1,11 @@
+{
+  "groups": [
+    {
+      "name": "",
+      "type": "edu.ucsb.cs156.example.services.SystemInfoServiceImpl",
+      "sourceType": "edu.ucsb.cs156.example.services.SystemInfoServiceImpl"
+    }
+  ],
+  "properties": [],
+  "hints": []
+}

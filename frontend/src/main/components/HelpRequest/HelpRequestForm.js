@@ -37,7 +37,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
                 <Form.Group className="mb-3" >
                     <Form.Label htmlFor="id">Id</Form.Label>
                     <Form.Control
-                        data-testid={testIdPrefix + "-id"}
+                        data-testid={"HelpRequestForm-id"}
                         id="id"
                         type="text"
                         {...register("id")}
@@ -50,7 +50,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="requesterEmail">Requester Email</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-requesterEmail"}
+                    data-testid={"HelpRequestForm-requesterEmail"}
                     id="requesterEmail"
                     type="text"
                     isInvalid={Boolean(errors.requesterEmail)}
@@ -68,7 +68,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="teamId">TeamID</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-teamId"}
+                    data-testid={"HelpRequestForm-teamId"}
                     id="teamId"
                     type="text"
                     isInvalid={Boolean(errors.teamId)}
@@ -86,7 +86,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="tableOrBreakoutRoom">Table Or Breakout Room</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-tableOrBreakoutRoom"}
+                    data-testid={"HelpRequestForm-tableOrBreakoutRoom"}
                     id="tableOrBreakoutRoom"
                     type="text"
                     isInvalid={Boolean(errors.tableOrBreakoutRoom)}
@@ -102,7 +102,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="requestTime">Request Time ISO Format</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-requestTime"}
+                    data-testid={"HelpRequestForm-requestTime"}
                     id="requestTime"
                     type="datetime-local"
                     isInvalid={Boolean(errors.requestTime)}
@@ -119,7 +119,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="explanation">Explanation</Form.Label>
                 <Form.Control
-                    data-testid={testIdPrefix + "-explanation"}
+                    data-testid={"HelpRequestForm-explanation"}
                     id="explanation"
                     type="text"
                     isInvalid={Boolean(errors.explanation)}
@@ -135,7 +135,7 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
             <Form.Group className="mb-3" >
                 <Form.Label htmlFor="solved">Solved</Form.Label>
                 <Form.Check
-                    data-testid={testIdPrefix + "-solved"}
+                    data-testid={"HelpRequestForm-solved"}
                     id="solved"
                     type="switch"
                     isInvalid={Boolean(errors.done)}
@@ -148,14 +148,14 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
 
             <Button
                 type="submit"
-                data-testid={testIdPrefix + "-submit"}
+                data-testid={"HelpRequestForm-submit"}
             >
                 {buttonLabel}
             </Button>
             <Button
                 variant="Secondary"
                 onClick={() => navigate(-1)}
-                data-testid={testIdPrefix + "-cancel"}
+                data-testid={"HelpRequestForm-cancel"}
             >
                 Cancel
             </Button>
