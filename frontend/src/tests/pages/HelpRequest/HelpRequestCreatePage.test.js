@@ -60,7 +60,7 @@ describe("HelpRequestCreatePage tests", () => {
             tableOrBreakoutRoom: "7",
             explanation: "Need help with Swagger-ui",
             solved: false,
-            requestTime: "2022-01-02T12:00:00"
+            requestTime: "2022-01-02T12:00"
         };
 
         axiosMock.onPost("/api/helprequest/post").reply( 202, helprequest );
@@ -87,9 +87,8 @@ describe("HelpRequestCreatePage tests", () => {
         fireEvent.change(teamIdField, { target: { value: "s22-5pm-3" } });
         fireEvent.change(tableOrBreakoutRoomField, { target: { value: "7" } });
         fireEvent.change(explanationField, { target: { value: "Need help with Swagger-ui" } });
-        //fireEvent.change(solvedField, { target: { value: "false" } });
         fireEvent.click(solvedField);
-        fireEvent.change(requestTimeField, { target: { value: "2022-01-02T12:00:00" } });
+        fireEvent.change(requestTimeField, { target: { value: "2022-01-02T12:00" } });
 
         expect(submitButton).toBeInTheDocument();
 
@@ -103,11 +102,11 @@ describe("HelpRequestCreatePage tests", () => {
                 teamId: "s22-5pm-3",
                 tableOrBreakoutRoom: "7",
                 explanation: "Need help with Swagger-ui",
-                solved: false,
-                requestTime: "2022-01-02T12:00:00"
+                solved: true,
+                requestTime: "2022-01-02T12:00"
         });
 
-        expect(mockToast).toBeCalledWith("New helprequest Created - id: 17");
+        expect(mockToast).toBeCalledWith("New help request Created - id: 17 requesterEmail: cgaucho@ucsb.edu teamId: s22-5pm-3");
         expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" });
     });
 

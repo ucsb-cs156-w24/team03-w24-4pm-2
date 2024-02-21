@@ -1,4 +1,4 @@
-import BasicLayout from "main/layouts/BasicLayout/BasicLayout";
+import BasicLayout from "main/layouts/BasicLayout/BasicLayout"; 
 import HelpRequestForm from "main/components/HelpRequest/HelpRequestForm";
 import { Navigate } from 'react-router-dom'
 import { useBackendMutation } from "main/utils/useBackend";
@@ -17,7 +17,7 @@ export default function HelpRequestCreatePage({storybook=false}) {
             solved: helprequest.solved,
             requestTime: helprequest.requestTime,
         }
-    });
+    }); 
 
     const onSuccess = (helprequest) => {
         toast(`New help request Created - id: ${helprequest.id} requesterEmail: ${helprequest.requesterEmail} teamId: ${helprequest.teamId}`);

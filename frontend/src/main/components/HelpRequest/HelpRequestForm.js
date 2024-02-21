@@ -16,14 +16,14 @@ function HelpRequestForm({ initialContents, submitAction, buttonLabel = "Create"
 
     const navigate = useNavigate();
 
-    const _testIdPrefix = "HelpRequestForm";
+    const testIdPrefix = "HelpRequestForm";
 
     // For explanation, see: https://stackoverflow.com/questions/3143070/javascript-regex-iso-datetime
     // Note that even this complex regex may still need some tweaks
 
     // Stryker disable next-line Regex
     const isodate_regex = /(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d\.\d+)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d:[0-5]\d)|(\d{4}-[01]\d-[0-3]\dT[0-2]\d:[0-5]\d)/i;
-    const teamid_regex = /(w(\d{2}))-(([1-9]|1[0-2])(a|p)m)-([1-4])/i;
+    const teamid_regex = /((w|s|m|f)(\d{2}))-(([1-9]|1[0-2])(a|p)m)-([1-4])/i;
     const email_regex = /[A-Za-z0-9_]@[A-Za-z0-9_]/i;
 
     // Stryker disable next-line all

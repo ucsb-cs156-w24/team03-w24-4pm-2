@@ -74,7 +74,7 @@ describe("HelpRequestEditPage tests", () => {
             axiosMock.onGet("/api/currentUser").reply(200, apiCurrentUserFixtures.userOnly);
             axiosMock.onGet("/api/systemInfo").reply(200, systemInfoFixtures.showingNeither);
             axiosMock.onGet("/api/helprequest", { params: { id: 17 } }).reply(200, {
-                id: 17,
+                id: 3,
                 requesterEmail: "cgaucho@ucsb.edu",
                 teamId: "s22-5pm-3",
                 tableOrBreakoutRoom: "7",
@@ -83,7 +83,7 @@ describe("HelpRequestEditPage tests", () => {
                 requestTime: "2022-01-02T12:00"
             });
             axiosMock.onPut('/api/helprequest').reply(200, {
-                id: "17",
+                id: 3,
                 requesterEmail: "gaucho@ucsb.edu",
                 teamId: "s23-5pm-3",
                 tableOrBreakoutRoom: "8",
@@ -116,7 +116,7 @@ describe("HelpRequestEditPage tests", () => {
             const solvedField = screen.getByTestId("HelpRequestForm-solved");
             const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-            expect(idField).toHaveValue("17");
+            expect(idField).toHaveValue("3");
             expect(requesterEmailField).toHaveValue("cgaucho@ucsb.edu");
             expect(teamIdField).toHaveValue("s22-5pm-3");
             expect(tableOrBreakoutRoomField).toHaveValue("7");
@@ -126,23 +126,6 @@ describe("HelpRequestEditPage tests", () => {
             expect(submitButton).toBeInTheDocument();
 
             expect(submitButton).toHaveTextContent("Update");
-
-            // fireEvent.change(nameField, { target: { value: 'Freebirds World Burrito' } });
-            // fireEvent.change(descriptionField, { target: { value: 'Totally Giant Burritos' } });
-            // fireEvent.click(submitButton);
-
-            // await waitFor(() => expect(mockToast).toBeCalled());
-            // expect(mockToast).toBeCalledWith("Restaurant Updated - id: 17 name: Freebirds World Burrito");
-            
-            // expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" });
-
-            // expect(axiosMock.history.put.length).toBe(1); // times called
-            // expect(axiosMock.history.put[0].params).toEqual({ id: 17 });
-            // expect(axiosMock.history.put[0].data).toBe(JSON.stringify({
-            //     name: 'Freebirds World Burrito',
-            //     description: 'Totally Giant Burritos'
-            // })); // posted object
-
 
         });
 
@@ -167,7 +150,7 @@ describe("HelpRequestEditPage tests", () => {
             const requestTimeField = screen.getByTestId("HelpRequestForm-requestTime");
             const submitButton = screen.getByTestId("HelpRequestForm-submit");
 
-            expect(idField).toHaveValue("17");
+            expect(idField).toHaveValue("3");
             expect(requesterEmailField).toHaveValue("cgaucho@ucsb.edu");
             expect(teamIdField).toHaveValue("s22-5pm-3");
             expect(tableOrBreakoutRoomField).toHaveValue("7");
@@ -181,12 +164,11 @@ describe("HelpRequestEditPage tests", () => {
             fireEvent.change(tableOrBreakoutRoomField, { target: { value: '8' } });
             fireEvent.change(requestTimeField, { target: { value: "2023-12-25T08:00" } });
             fireEvent.change(explanationField, { target: { value: 'Need help with mutation tests' } });
-            fireEvent.click(solvedField);
-
+            fireEvent.change(solvedField, { target: { value: false } });
             fireEvent.click(submitButton);
 
             await waitFor(() => expect(mockToast).toBeCalled());
-            expect(mockToast).toBeCalledWith("Help Request Updated - id: 17 requesterEmail: gaucho@ucsb.edu");
+            expect(mockToast).toBeCalledWith("Help Request Updated - id: 3 requesterEmail: gaucho@ucsb.edu");
             expect(mockNavigate).toBeCalledWith({ "to": "/helprequest" });
         });
 
