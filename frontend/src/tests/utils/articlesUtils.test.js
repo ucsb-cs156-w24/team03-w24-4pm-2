@@ -11,7 +11,7 @@ jest.mock('react-toastify', () => {
     };
 });
 
-describe("articleUtils", () => {
+describe("articlesUtils", () => {
 
     describe("onDeleteSuccess", () => {
 

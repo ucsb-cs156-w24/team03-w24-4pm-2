@@ -1,39 +1,38 @@
 const articlesFixtures = {
     oneArticle: {
         "id": 1,
-        "title": "title1",
-        "url": "url1.com",
-        "explanation": "explain1",
-        "email": "email1@gmail.com",
-        "dateAdded":"2022-01-02T12:00:01" 
+        "title": "Test",
+        "url": "test.com",
+        "explanation": "test article",
+        "email": "test@gmail.com",
+        "dateAdded": "2022-01-02T12:00:00"
     },
-    threeArticles: [
+    threeArticle: [
         {
             "id": 1,
-            "title": "title1",
-            "url": "url1.com",
-            "explanation": "explain1",
-            "email": "email1@gmail.com",
-            "dateAdded":"2022-01-02T12:00:01" 
+            "title": "Test1",
+            "url": "test1.com",
+            "explanation": "test article 1",
+            "email": "test1@gmail.com",
+            "dateAdded": "2022-01-02T12:00:00"
         },
         {
             "id": 2,
-            "title": "title2",
-            "url": "url2.com",
-            "explanation": "explain2",
-            "email": "email2@gmail.com",
-            "dateAdded":"2022-01-02T12:00:02" 
+            "title": "Test2",
+            "url": "test2.com",
+            "explanation": "test article 2",
+            "email": "test2@gmail.com",
+            "dateAdded": "2022-04-03T12:00:00"
         },
         {
             "id": 3,
-            "title": "title3",
-            "url": "url3.com",
-            "explanation": "explain3",
-            "email": "email3@gmail.com",
-            "dateAdded":"2022-01-02T12:00:03" 
+            "title": "Test3",
+            "url": "test3.com",
+            "explanation": "test article 3",
+            "email": "test3@gmail.com",
+            "dateAdded": "2022-07-04T12:00:00"
         }
     ]
 };
-
 
 export { articlesFixtures };
