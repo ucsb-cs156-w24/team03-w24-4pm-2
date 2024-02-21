@@ -23,7 +23,7 @@ describe("HelpRequestForm tests", () => {
         render(
             <QueryClientProvider client={queryClient}>
                 <Router>
-                    <HelpRequestForm />
+                    <HelpRequestForm /> 
                 </Router>
             </QueryClientProvider>
         );

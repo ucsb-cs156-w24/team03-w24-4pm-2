@@ -17,7 +17,7 @@ describe("UserTable tests", () => {
   const queryClient = new QueryClient();
 
   const expectedHeaders = ["id", "Requester Email", "Team ID", "Table or Breakout Room", "Explanation", "Solved", "Request Time ISO Format"];
-  const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "explanation", "solved", "requestTime"];
+  const expectedFields = ["id", "requesterEmail", "teamId", "tableOrBreakoutRoom", "explanation", "Solved", "requestTime"];
   const testId = "HelpRequestTable";
 
   test("renders empty table correctly", () => {
@@ -145,7 +145,7 @@ describe("UserTable tests", () => {
     fireEvent.click(editButton);
 
     // assert - check that the navigate function was called with the expected path
-    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/ucsbhelprequest/edit/1'));
+    await waitFor(() => expect(mockedNavigate).toHaveBeenCalledWith('/helprequest/edit/1'));
 
   });
 
