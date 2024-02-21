@@ -51,7 +51,7 @@ export default function HelpRequestTable({ requests, currentUser }) {
         {
             Header: 'Solved',
             accessor: 'solved',
-            //accessor: row => String(row.solved)
+            accessor: row => String(row.solved)
         },
         {
             Header: 'Request Time ISO Format',
